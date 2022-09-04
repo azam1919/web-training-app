@@ -62,7 +62,7 @@
                     <div class="row my-2">
                         <div class="col-6">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember" value="RememberMe">
+                                <input type="checkbox" id="remember" value="RememberMe" checked>
                                 <label for="remember">
                                     Remember Me
                                 </label>

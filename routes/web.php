@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -23,8 +24,11 @@ Route::get('/', function () {
         return view('admin.auth.login');
     }
 });
+Route::post('/logout', [LogoutController::class, 'logout']);
+
 Route::prefix('admin')->group(function () {
-    Route::post('/', [LoginController::class, 'admin_login']);
+    Route::match(['get', 'post'], '/', [LoginController::class, 'admin_login']);
+
     // Route::middleware('AdminLogin')->group(function () {
     //For Login
     Route::prefix('auth')->group(function () {
