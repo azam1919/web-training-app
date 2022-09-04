@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +17,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Session::has('r_id') && Session::get('status') == 1) {
+        return redirect('admin/dashboard');
+    } else {
+        return view('admin.auth.login');
+    }
+});
+Route::prefix('admin')->group(function () {
+    Route::post('/', [LoginController::class, 'admin_login']);
+    // Route::middleware('AdminLogin')->group(function () {
+    //For Login
+    Route::prefix('auth')->group(function () {
+        Route::view('/forget', 'user.auth.forget');
+        Route::view('/reset', 'user.auth.reset');
+        Route::post('/forget', [ForgotPasswordController::class, 'user_forget_password']);
+        Route::post('/reset', [ResetPasswordController::class, 'user_reset_password']);
+    });
+    //DashboardController
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', [DashboardController::class, 'admin_dashboard']);
+    });
+    // });
 });

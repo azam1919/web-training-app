@@ -21,9 +21,9 @@ class CreatePermissionsTable extends Migration
             $table->integer('add')->nullable();
             $table->integer('edit')->nullable();
             $table->integer('delete')->nullable();
+            $table->timestamps();
             $table->foreign('r_id')->references('id')->on('roles')->onDelete('cascade');
             $table->foreign('m_id')->references('id')->on('modules')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

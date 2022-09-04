@@ -20,7 +20,7 @@ class CreateModulesTable extends Migration
             $table->string('icon')->nullable();
             $table->string('status');
             $table->string('type');
-            $table->foreign('m_g_id')->references('id')->on('module_groups')->onDelete('cascade');
+            $table->foreign('m_g_id')->references('id')->on('modules_groups')->onDelete('cascade');
             $table->timestamps();
         });
     }
