@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\WebTrainingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -40,6 +41,9 @@ Route::prefix('admin')->group(function () {
     //DashboardController
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'admin_dashboard']);
+    });
+    Route::prefix('web-training')->group(function () {
+        Route::get('/', [WebTrainingController::class, 'index']);
     });
     // });
 });
