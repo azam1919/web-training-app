@@ -24,10 +24,10 @@ class WebTrainingController extends Controller
     }
     public function store(Request $request)
     {
-        if ($request->session()->has('full_name')) {
-            return view('admin.dashboard.index');
+        if (FacadesRequest::isMethod('get')) {
+            return view('admin.web-training.create');
+        } elseif (FacadesRequest::isMethod('post')) {
         } else {
-            return redirect('/');
         }
     }
     public function update(Request $request)

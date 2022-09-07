@@ -22,7 +22,7 @@ Route::get('/', function () {
     if (Session::has('r_id') && Session::get('status') == 1) {
         return redirect('admin/dashboard');
     } else {
-        return view('admin.auth.login');
+        return view('home.index');
     }
 });
 Route::post('/logout', [LogoutController::class, 'logout']);
@@ -44,6 +44,7 @@ Route::prefix('admin')->group(function () {
     });
     Route::prefix('web-training')->group(function () {
         Route::get('/', [WebTrainingController::class, 'index']);
+        Route::match(['get', 'post'], '/create', [WebTrainingController::class, 'store']);
     });
     // });
 });
