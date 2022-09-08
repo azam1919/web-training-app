@@ -8,15 +8,14 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Web Training | List</title>
+    @Include('layouts.favicon')
+    @Include('layouts.links.admin.head')
+    @Include('layouts.links.datatable.head')
     <style>
         .flex-wrap {
             float: right !important;
         }
     </style>
-    @Include('layouts.favicon')
-    @Include('layouts.links.admin.head')
-    @Include('layouts.links.datatable.head')
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -38,14 +37,7 @@
                                     <li class="breadcrumb-item active">Web Tutorials</li>
                                 </ol>
                             </div>
-                            <div class="col-sm-6 mt-3">
-                                <a href="/admin/web-training/create" class="border px-2 btn"
-                                    style="background-color: #091E3E;color: white">
-                                    Create Tutorial
-                                </a>
-                            </div>
                         </div>
-
                     </div><!-- /.container-fluid -->
                 </section>
 
@@ -54,10 +46,10 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">
+
                                 <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title">Web Tutorials List</h3>
-
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">

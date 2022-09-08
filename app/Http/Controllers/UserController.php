@@ -27,7 +27,6 @@ class UserController extends Controller
         $module_groups = ModulesGroup::whereHas('modules.permissions', $modules)->orwhereDoesntHave('modules.permissions', $modules)
             ->with('modules.permissions', $modules)
             ->get();
-        dd($module_groups->toArray());
         $Alertstatuses = Alert::where([
             ['status', '=', 1],
         ])->count();

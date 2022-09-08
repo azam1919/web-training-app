@@ -9,15 +9,13 @@
     <meta name="author" content="" />
     <title>Web Training | Dashboard</title>
     @Include('layouts.favicon')
-    @Include('layouts.links.head')
+    @Include('layouts.links.admin.head')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-    @extends('layouts.master')
+    @extends('layouts.admin.master')
     @section('content')
         <div class="wrapper">
-
-
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
@@ -496,7 +494,7 @@
             </div>
         </div>
     @endsection
-    @Include('layouts.links.foot')
+    @Include('layouts.links.admin.foot')
 </body>
 
 </html>
