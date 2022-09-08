@@ -18,6 +18,15 @@
     <link rel="stylesheet" href="/dist/css/alt/login.css">
 
     <script src="dist/js/pages/login.js"></script>
+    <script>
+        setTimeout(function() {
+            $('#status1').slideUp('slow');
+            $('#failed').slideUp('slow');
+            $('#UpdatedSuccess').slideUp('slow');
+            $('#email_msg').slideUp('slow');
+            $('#password_msg').slideUp('slow');
+        }, 3000);
+    </script>
 </head>
 
 <body class="hold-transition login-page">
@@ -39,7 +48,19 @@
                             </div>
                         </div>
                         <input type="email" name="email" class="form-control" placeholder="Email">
-
+                        <div class="invalid-feedback order-last" id="email_msg">
+                            @error('email')
+                                {{ $message }}
+                            @enderror
+                            @if (session('failed'))
+                                {{ session('failed') }}
+                            @endif
+                            @if (session('UpdatedSuccess'))
+                                <span class="text-success error_message text-center to" style="margin-top: -5px"
+                                    id="UpdatedSuccess">{{ session('UpdatedSuccess') }}
+                                </span>
+                            @endif
+                        </div>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
@@ -57,6 +78,11 @@
                                     <i id="Hide" class="fas fa-eye-slash"></i>
                                 </span>
                             </div>
+                        </div>
+                        <div class="invalid-feedback order-last" id="password_msg">
+                            @error('password')
+                                {{ $message }}
+                            @enderror
                         </div>
                     </div>
                     <div class="row my-2">
