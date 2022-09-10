@@ -38,6 +38,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/forget', [ForgotPasswordController::class, 'user_forget_password']);
         Route::post('/reset', [ResetPasswordController::class, 'user_reset_password']);
     });
+
     //DashboardController
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'admin_dashboard']);
@@ -45,6 +46,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('web-training')->group(function () {
         Route::get('/', [WebTrainingController::class, 'index']);
         Route::match(['get', 'post'], '/create', [WebTrainingController::class, 'store']);
+        Route::match(['get', 'post'], '/test', [WebTrainingController::class, 'storing']);
     });
     // });
 });
