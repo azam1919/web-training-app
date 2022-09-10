@@ -7,13 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Web Training | List</title>
+    <title>Web Training | Create Tutorials</title>
     @Include('layouts.favicon')
     @Include('layouts.links.admin.head')
-    @Include('layouts.links.datatable.head')
+    <link rel="stylesheet" href="{{ asset('dist/css/summernote.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/summernote-lite.min.css') }}">
     <style>
-        .flex-wrap {
-            float: right !important;
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
     </style>
 </head>
@@ -21,245 +37,148 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     @extends('layouts.admin.master')
     @section('content')
-        <div class="wrapper">
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1>Web Tutorials</h1>
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active">Web Tutorials</li>
-                                </ol>
-                            </div>
+    <div class="wrapper">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Create Tutorials</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Create Tutorials</li>
+                            </ol>
                         </div>
-                    </div><!-- /.container-fluid -->
-                </section>
+                        <!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
 
-                <!-- Main content -->
-                <section class="content">
-                    <div class="container-fluid">
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Main row -->
+                    <form action="">
                         <div class="row">
-                            <div class="col-12">
-
+                            <!-- Left col -->
+                            <section class="col-lg-4 connectedSortable">
+                                <!-- Custom tabs (Charts with tabs)-->
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">Web Tutorials List</h3>
-                                    </div>
-                                    <!-- /.card-header -->
+                                        <h3 class="card-title">
+                                            <i class="fas fa-image mr-1"></i>
+                                            Drag and Drop Images
+                                        </h3>
+                                    </div><!-- /.card-header -->
                                     <div class="card-body">
-                                        <table id="example1" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Browser</th>
-                                                    <th>Platform(s)</th>
-                                                    <th>Engine version</th>
-                                                    <th>CSS grade</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet
-                                                        Explorer 4.0
-                                                    </td>
-                                                    <td>Win 95+</td>
-                                                    <td> 4</td>
-                                                    <td>X</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet
-                                                        Explorer 5.0
-                                                    </td>
-                                                    <td>Win 95+</td>
-                                                    <td>5</td>
-                                                    <td>C</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet
-                                                        Explorer 5.5
-                                                    </td>
-                                                    <td>Win 95+</td>
-                                                    <td>5.5</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet
-                                                        Explorer 6
-                                                    </td>
-                                                    <td>Win 98+</td>
-                                                    <td>6</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet Explorer 7</td>
-                                                    <td>Win XP SP2+</td>
-                                                    <td>7</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>AOL browser (AOL desktop)</td>
-                                                    <td>Win XP</td>
-                                                    <td>6</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Firefox 1.0</td>
-                                                    <td>Win 98+ / OSX.2+</td>
-                                                    <td>1.7</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Firefox 1.5</td>
-                                                    <td>Win 98+ / OSX.2+</td>
-                                                    <td>1.8</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Firefox 2.0</td>
-                                                    <td>Win 98+ / OSX.2+</td>
-                                                    <td>1.8</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Firefox 3.0</td>
-                                                    <td>Win 2k+ / OSX.3+</td>
-                                                    <td>1.9</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Camino 1.0</td>
-                                                    <td>OSX.2+</td>
-                                                    <td>1.8</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Camino 1.5</td>
-                                                    <td>OSX.3+</td>
-                                                    <td>1.8</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Netscape 7.2</td>
-                                                    <td>Win 95+ / Mac OS 8.6-9.2</td>
-                                                    <td>1.7</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Netscape Browser 8</td>
-                                                    <td>Win 98SE+</td>
-                                                    <td>1.7</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Netscape Navigator 9</td>
-                                                    <td>Win 98+ / OSX.2+</td>
-                                                    <td>1.8</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.0</td>
-                                                    <td>Win 95+ / OSX.1+</td>
-                                                    <td>1</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.1</td>
-                                                    <td>Win 95+ / OSX.1+</td>
-                                                    <td>1.1</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.2</td>
-                                                    <td>Win 95+ / OSX.1+</td>
-                                                    <td>1.2</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.3</td>
-                                                    <td>Win 95+ / OSX.1+</td>
-                                                    <td>1.3</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.4</td>
-                                                    <td>Win 95+ / OSX.1+</td>
-                                                    <td>1.4</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.5</td>
-                                                    <td>Win 95+ / OSX.1+</td>
-                                                    <td>1.5</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.6</td>
-                                                    <td>Win 95+ / OSX.1+</td>
-                                                    <td>1.6</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.7</td>
-                                                    <td>Win 98+ / OSX.1+</td>
-                                                    <td>1.7</td>
-                                                    <td>A</td>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Rendering engine</th>
-                                                    <th>Browser</th>
-                                                    <th>Platform(s)</th>
-                                                    <th>Engine version</th>
-                                                    <th>CSS grade</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                    <!-- /.card-body -->
+                                        <div class="p-0">
+                                            <!-- Image -->
+                                            <div class="row justify-content-center align-items-center" id="browse_image" role="button" style="height: 130px; border-color: #b2afaf;  border-style: dashed; ">
+                                                <p>Browse image</p>
+                                                <input type="file" id="input_image" name="" hidden>
+                                            </div>
+                                            <p></p>
+                                            <div style="position: relative; height: 200px; overflow-y: scroll;">
+                                                <!-- <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas> -->
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                            </div>
+                                        </div>
+                                    </div><!-- /.card-body -->
                                 </div>
                                 <!-- /.card -->
-                            </div>
-                            <!-- /.col -->
+                                <!-- Uploaded images -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            <i class="fas fa-image mr-1"></i>
+                                            Uploaded Images
+                                        </h3>
+                                    </div><!-- /.card-header -->
+                                    <div class="card-body">
+                                        <div class="tab-content p-0">
+                                            <!-- Morris chart - Sales -->
+                                            <div class="chart " id="revenue-chart" style="position: relative; height: 300px; overflow-y: scroll;">
+                                                <!-- <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas> -->
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam culpa similique qui. Voluptates excepturi necessitatibus ullam et error aliquid natus amet odit culpa dicta, in unde hic dolor a! Sapiente.</p>
+                                            </div>
+                                        </div>
+                                    </div><!-- /.card-body -->
+                                </div>
+                                <!--Uploaded images -->
+                            </section>
+                            <!-- /.Left col -->
+                            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                            <section class="col-lg-8 connectedSortable">
+                                <!-- Map card -->
+                                <div class="card ">
+                                    <div class="card-header ">
+                                        <h3 class="card-title">
+                                            <i class="fas fa-edit mr-1"></i>
+                                            Edit Images
+                                        </h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div style="height: 350px; width: 100%;">
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body-->
+                                </div>
+                                <!-- /.card -->
+
+                                <!-- Map card -->
+                                <div class="card">
+                                    <div class="card-header ">
+                                        <h3 class="card-title">
+                                            <i class="fas fa-edit mr-1"></i>
+                                            Description
+                                        </h3>
+                                    </div>
+                                    <div class="card-body" id="summernote">
+                                        <div style="height: 280px; width: 100%;">
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body-->
+                                </div>
+                                <!-- /.card -->
+                            </section>
+                            <!-- right col -->
                         </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.container-fluid -->
-                </section>
-                <!-- /.content -->
-            </div>
+                    </form>
+                    <!-- /.row (main row) -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
         </div>
+    </div>
     @endsection
-    @Include('layouts.links.datatable.foot')
+    @Include('layouts.links.admin.foot')
+    <script src="{{ asset('dist/js/summernote-lite.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $("#summernote").summernote();
+            // $('.dropdown-toggle').dropdown();
+        });
+    </script>
 </body>
 
 </html>

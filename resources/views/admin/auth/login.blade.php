@@ -7,8 +7,8 @@
     <title>Admin | Login</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
     <!-- icheck bootstrap -->
@@ -34,11 +34,18 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="../../index2.html" class="h1"><b>Web Training</b></a>
+                <!-- <a href="#" class="h1"><b>Web Training</b></a> -->
+                <h1><b>Web Training</b></h1>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Sign in</p>
+                <!-- <p class="login-box-msg">Sign in</p> -->
 
+                <!-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Email or password does nbot matched
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div> -->
                 <form action="/admin" method="post">
                     @csrf
                     <div class="input-group mb-3">
@@ -49,16 +56,12 @@
                         </div>
                         <input type="email" name="email" class="form-control" placeholder="Email">
                         <div class="invalid-feedback order-last" id="email_msg">
-                            @error('email')
-                                {{ $message }}
-                            @enderror
-                            @if (session('failed'))
-                                {{ session('failed') }}
-                            @endif
+                            @error('email') {{ $message }} @enderror
+                            @if (session('failed'))  {{ session('failed') }} @endif
                             @if (session('UpdatedSuccess'))
-                                <span class="text-success error_message text-center to" style="margin-top: -5px"
-                                    id="UpdatedSuccess">{{ session('UpdatedSuccess') }}
-                                </span>
+                            <span class="text-success error_message text-center to" style="margin-top: -5px" id="UpdatedSuccess">
+                            {{ session('UpdatedSuccess') }}
+                            </span>
                             @endif
                         </div>
                     </div>
@@ -68,8 +71,7 @@
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
-                        <input type="password" name="password" class="form-control" id="password"
-                            placeholder="Password">
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 {{-- <span class="fas fa-eye"></span> --}}
@@ -81,7 +83,7 @@
                         </div>
                         <div class="invalid-feedback order-last" id="password_msg">
                             @error('password')
-                                {{ $message }}
+                            {{ $message }}
                             @enderror
                         </div>
                     </div>
@@ -95,9 +97,9 @@
                             </div>
                         </div>
                         <!-- /.col -->
-                        <div class="col-6 text-right">
+                        <!-- <div class="col-6 text-right">
                             <a href="forgot-password.html">Forget Password?</a>
-                        </div>
+                        </div> -->
                         <!-- /.col -->
                     </div>
                     <div class="row">
@@ -107,11 +109,23 @@
                         </div>
                         <!-- /.col -->
                     </div>
+                    <div class="row my-2">
+                        <div class="col-6">
+                            <!-- <div class="icheck-primary">
+                                <input type="checkbox" id="remember" value="RememberMe" checked>
+                                <label for="remember">
+                                    Remember Me
+                                </label>
+                            </div> -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-6 text-right">
+                            <a href="forgot-password.html">Forget Password?</a>
+                        </div>
+                        <!-- /.col -->
+                    </div>
                 </form>
-
                 <!-- /.social-auth-links -->
-
-
                 {{-- <p class="my-4">
                     <a href="register.html" class="text-center">Not have any account?Registered Here</a>
                 </p> --}}
