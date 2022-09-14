@@ -266,6 +266,7 @@
                 <!-- /.content -->
             </div>
         </div>
+        
     @endsection
     @Include('layouts.links.datatable.foot')
 </body>
