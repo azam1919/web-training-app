@@ -12,68 +12,22 @@
     @Include('layouts.links.admin.head')
     <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote-lite.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote.min.css') }}">
-    <script>
-        var baseUrl = "{{ url('/') }}";
-        var token = "";
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 
-        Dropzone.autoDiscover = false;
-
-        var myDropzone = new Dropzone("#upload_excel", {
-            paramName: "file",
-            acceptedFiles: ".xls,.xlsx",
-            maxFiles: 1,
-            maxFilesize: 10,
-            url: baseUrl + "/upload",
-            params: {
-                _token: token
-            }
-        });
-    </script>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <style>
-        body {
-            background: #333;
+        .dropzone {
+            min-height: 100px !important;
+            max-height: 100px !important;
+            border-color: #b2afaf;
+            border-style: dashed;
         }
 
-        #dropzone {
-            position: relative;
-            height: 120px;
-            text-align: center;
-            width: 100%;
-        }
-
-        #dropzone.hover {
-            border: 10px solid #FE5;
-            color: #FE5;
-        }
-
-        #dropzone.dropped {
-            background: #222;
-            border: 10px solid #444;
-        }
-
-        #dropzone div {
-            text-align: center;
-        }
-
-        #dropzone img {
-            border-radius: 10px;
-            vertical-align: middle;
-            max-width: 95%;
-            max-height: 95%;
-        }
-
-        #dropzone [type="file"] {
-            cursor: pointer;
-            position: absolute;
-            opacity: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
+        .dz-message {
+            margin: 1em 0 !important;
         }
     </style>
-
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -121,27 +75,28 @@
                                             <div class="p-0">
                                                 <!-- Image -->
                                                 <div class="container-fluid">
-                                                    {{-- <div class="row"> --}}
-                                                    <div class="row justify-content-center align-items-center "
-                                                        id="browse_image" role="button"
-                                                        style="height: 130px; border-color: #b2afaf;  border-style: dashed;">
-                                                        <div action="#" id="dropzone" class="dropzone py-5">
-                                                            <div class="fallback">
-                                                                Drag & Drop File
-                                                                <input type="file" name="images[]"
-                                                                    class="file-styled btn btn-primary"
-                                                                    accept=".jpg, .jpeg, .png" required multiple>
+                                                    <form action="/file-upload" class="dropzone">
+                                                        <div class="fallback" style="display: none" {{-- style="height: 130px; border-color: #b2afaf;  border-style: dashed;" --}}>
+                                                        </div>
+                                                    </form>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <form action="/file-upload" class="dropzone">
+                                                                <div class="fallback">
+                                                                    <input name="file" type="file" multiple />
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div id="showhere"
+                                                                style="position: relative; height: 200px; overflow-y: scroll;">
                                                             </div>
                                                         </div>
 
-
                                                     </div>
                                                 </div>
-
                                                 <p></p>
-                                                <div class="img-div"
-                                                    style="position: relative; height: 200px; overflow-y: scroll;">
-                                                </div>
+
                                             </div>
                                         </div><!-- /.card-body -->
                                     </div>
@@ -260,6 +215,28 @@
             </div>
         </div>
     @endsection
+    <script type="text/javascript">
+        Dropzone.options.dropzone = {
+            maxFilesize: 12,
+            renameFile: function(file) {
+                var dt = new Date();
+                var time = dt.getTime();
+                return time + file.name;
+            },
+            previewsContainer: "#showhere",
+            clickable: "#showhere",
+            dictDefaultMessage: "",
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            addRemoveLinks: true,
+            timeout: 5000,
+            success: function(file, response) {
+                console.log(response);
+            },
+            error: function(file, response) {
+                return false;
+            }
+        };
+    </script>
     @Include('layouts.links.admin.foot')
     <script src="{{ asset('dist/js/pages/tutorial/summernote-lite.min.js') }}"></script>
     <script src="{{ asset('dist/js/pages/tutorial/summer-note.js') }}"></script>
