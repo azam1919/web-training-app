@@ -30,6 +30,14 @@ class WebTrainingController extends Controller
         } else {
         }
     }
+    public function storing(Request $request)
+    {
+        if (FacadesRequest::isMethod('get')) {
+            return view('admin.web-training.test');
+        } elseif (FacadesRequest::isMethod('post')) {
+        } else {
+        }
+    }
     public function update(Request $request)
     {
         if ($request->session()->has('full_name')) {
