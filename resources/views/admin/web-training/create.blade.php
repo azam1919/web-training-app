@@ -168,6 +168,7 @@
                 // A valid callback function that is called after the preview dialog appears. Useful for temporarily preventing unwanted UI interactions elsewhere.
                 'showpreview': function(e, data, preview, previewclone) {
                     // do something
+                    alert('hello');
                 },
 
                 // A valid callback function that is called after the preview dialog disappears. 
