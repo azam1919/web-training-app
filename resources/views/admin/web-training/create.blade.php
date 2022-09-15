@@ -14,6 +14,27 @@
 
     <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote-lite.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote.min.css') }}">
+    <style>
+        /* width */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -168,7 +189,6 @@
                 // A valid callback function that is called after the preview dialog appears. Useful for temporarily preventing unwanted UI interactions elsewhere.
                 'showpreview': function(e, data, preview, previewclone) {
                     // do something
-                    alert('hello');
                 },
 
                 // A valid callback function that is called after the preview dialog disappears. 
