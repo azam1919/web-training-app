@@ -116,7 +116,7 @@
                                                     <div class="col-lg-12"
                                                         style="height: 350px; overflow: hidden; overflow-y: scroll;">
                                                         <div class="fallback">
-                                                            <input id="fancy_upload" type="file" name="files"
+                                                            <input id="fancy_upload" type="file" name="file"
                                                                 accept=".jpg, .png, image/jpeg, image/png" multiple>
                                                         </div>
                                                     </div>
@@ -181,126 +181,88 @@
                 </section>
             </div>
         </div>
-        <script>
-            $(document).ready(function() {
-                var token;
-                $('#fancy_upload').FancyFileUpload({
-
-                    // send data to this url
-                    // 'url': 'admin/web-training/create',
-
-                    // key-value pairs to send to the server
-                    'params': {
-                        action: 'fileuploader'
-                    },
-
-                    // editable file name?
-                    'edit': true,
-
-                    // max file size
-                    'maxfilesize': -1,
-
-                    // a list of allowed file extensions
-                    'accept': null,
-
-                    // 'iec_windows', 'iec_formal', or 'si' to specify what units to use when displaying file sizes
-                    'displayunits': 'iec_windows',
-
-                    // adjust the final precision when displaying file sizes
-                    'adjustprecision': true,
-
-                    // the number of retries to perform before giving up
-                    'retries': 5,
-
-                    // the base delay, in milliseconds, to apply between retries
-                    'retrydelay': 500,
-
-                    // an object containing valid MediaRecorder options
-                    // https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder
-                    'audiosettings': {},
-
-                    // whether or not to display a toolbar button with a webcam icon for recording <a href="https://www.jqueryscript.net/tags.php?/video/">video</a> directly via the web browser
-                    'recordvideo': false,
-
-                    // an object containing valid MediaRecorder options
-                    // https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder
-                    'videosettings': {},
-
-                    // A valid callback function that is called after the preview dialog appears. Useful for temporarily preventing unwanted UI interactions elsewhere.
-                    'showpreview': function(e, data, preview, previewclone) {
-                        console.log('Yes');
-                    },
-
-                    // A valid callback function that is called after the preview dialog disappears.
-                    'hidepreview': function(e, data, preview, previewclone) {
-                        console.log('Yes');
-                    },
-
-                    // A valid callback function that is called during initialization to allow for last second changes to the settings.
-                    // Useful for altering fileupload options on the fly.
-                    'preinit': null,
-
-                    // A valid callback function that is called at the end of initialization of each instance.
-                    'postinit': null,
-
-                    // called for each item after it has been added to the DOM
-                    'added': function(e, data) {
-                        // do something
-                    },
-
-                    // called whenever starting the upload
-                    'startupload': function(SubmitUpload, e, data) {
-                        $.ajax({
-                            'type': 'post',
-                            'url': '/admin/web-training/create',
-                            'dataType': 'json',
-                            'headers': {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            'success': function(tokendata) {
-                                token = tokendata;
-                                SubmitUpload();
-                            }
-                        });
-                    },
-
-                    // called whenever progress is up<a href="https://www.jqueryscript.net/time-clock/">date</a>d
-                    'continueupload': function(e, data) {
-                        // do something
-                    },
-
-                    // called whenever an upload has been cancelled
-                    'uploadcancelled': function(e, data) {
-                        console.log('Are You your');
-                        alert('Are You your');
-                    },
-
-                    // called whenever an upload has successfully completed
-                    'uploadcompleted': function(e, data) {
-                        // do something
-                    },
-
-                    // jQuery File Upload options
-                    'fileupload': {},
-
-                    // translation strings here
-                    'lang<a href="https://www.jqueryscript.net/tags.php?/map/">map</a>': {}
-
-                    // 'continueupload': function(e, data) {
-                    //     var ts = Math.round(new Date().getTime() / 1000);
-
-                    //     // Alternatively, just call data.abort() or return false here to terminate the upload but leave the UI elements alone.
-                    //     if (token.expires < ts) data.ff_info.RemoveFile();
-                    // },
-                    // 'uploadcompleted': function(e, data) {
-                    //     data.ff_info.RemoveFile();
-                    // }
-                });
-
-            });
-        </script>
     @endsection
     @Include('layouts.links.admin.foot')
+    <script>
+        $(document).ready(function() {
+            var token;
+            // var file = $('#fancy_upload').val();
+            $('#fancy_upload').FancyFileUpload({
+
+                // send data to this url
+                // 'url': 'admin/web-training/create',
+
+                // key-value pairs to send to the server
+                'params': {
+                    action: 'fileuploader'
+                },
+
+                // editable file name?
+                'edit': true,
+
+                // max file size
+                'maxfilesize': -1,
+
+                // called whenever starting the upload
+                'startupload': function(SubmitUpload, e, data) {
+                    $.ajax({
+                        'headers': {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        'type': 'post',
+                        'url': '/admin/web-training/create',
+                        'dataType': 'json',
+                        'contentType': 'multipart/form-data',
+                        'data': {
+                            'file': $('#fancy_upload').val(),
+                        },
+                        'cache': false,
+                        'processData': false,
+                        'contentType': false,
+                        'success': function(response) {
+                            alert('Yes')
+                            // SubmitUpload();
+                        }
+                    });
+                },
+
+                // called whenever progress is up<a href="https://www.jqueryscript.net/time-clock/">date</a>d
+                'continueupload': function(e, data) {
+                    // do something
+                },
+
+                // called whenever an upload has been cancelled
+                'uploadcancelled': function(e, data) {
+                    console.log('Are You your');
+                    alert('Are You your');
+                },
+
+                // called whenever an upload has successfully completed
+                'uploadcompleted': function(e, data) {
+                    // do something
+                },
+
+                // jQuery File Upload options
+                'fileupload': {
+                    singleFileUploads: true
+                },
+
+                // translation strings here
+                'lang<a href="https://www.jqueryscript.net/tags.php?/map/">map</a>': {}
+
+                // 'continueupload': function(e, data) {
+                //     var ts = Math.round(new Date().getTime() / 1000);
+
+                //     // Alternatively, just call data.abort() or return false here to terminate the upload but leave the UI elements alone.
+                //     if (token.expires < ts) data.ff_info.RemoveFile();
+                // },
+                // 'uploadcompleted': function(e, data) {
+                //     data.ff_info.RemoveFile();
+                // }
+            });
+
+        });
+    </script>
     {{-- <!-- <script src="{{ asset('dist/js/imageupload/jquery-1.12.4.min.js') }}"></script> --> --}}
     <script src="{{ asset('dist/js/imageupload/jquery.ui.widget.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.fileupload.js') }}"></script>

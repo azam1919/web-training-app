@@ -6,6 +6,7 @@ use App\Models\WebTraining;
 use App\Models\WebTrainingAsset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Session;
 
@@ -48,17 +49,20 @@ class WebTrainingController extends Controller
 
                 $request->session()->put('web_tr_id', $web_tr_id);
                 return back()->with('success', 'Heading Stored Successfully');
-            } elseif (!empty($request->data)) {
-                dd(1);
+            } elseif ($request->hasFile('file')) {
+                dd(Session::get('web_tr_id'));
+                $file = $request->file('file');
+                $extension = $file->getClientOriginalExtension();
+                $file_original_name = $file->getClientOriginalName();
+                $filename = $file_original_name . '.' . $extension;
+                $file->move('dist/img/tutorial', $filename);
                 if (!empty(Session::get('web_tr_id'))) {
                     $web_tr_id = Session::get('web_tr_id');
-                    $image = $request->image;
                     WebTrainingAsset::insert([
-                        'image' => $image,
+                        'image' => $filename,
                         'web_tr_id' => $web_tr_id
                     ]);
                 }
-                return "1";
             }
         } else {
             return back();

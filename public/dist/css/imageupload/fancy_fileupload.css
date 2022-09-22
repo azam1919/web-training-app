@@ -365,7 +365,7 @@
 }
 
 .ff_fileupload_wrap table.ff_fileupload_uploads td.ff_fileupload_summary .ff_fileupload_progress_bar {
-    background-color: #157EFB;
+    background-color: #157EFB !important;
     width: 0;
     height: 2px;
 }
