@@ -27,9 +27,6 @@ Route::get('/', function () {
 });
 Route::post('/logout', [LogoutController::class, 'logout']);
 
-Route::get('image/upload','ImageUploadController@fileCreate');
-Route::post('image/upload/store','ImageUploadController@fileStore');
-Route::post('image/delete','ImageUploadController@fileDestroy');
 Route::prefix('admin')->group(function () {
     Route::match(['get', 'post'], '/', [LoginController::class, 'admin_login']);
 
