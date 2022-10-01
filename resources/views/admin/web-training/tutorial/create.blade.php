@@ -56,36 +56,16 @@
                 <div class="content-header">
                     <div class="container-fluid">
                         @if (session('success'))
-                            <div class="alert alert-primary" id="success" role="alert">
+                            <div class="alert alert-default-success alert-dismissible fade show" id="success"
+                                role="alert">
                                 {{ session('success') }}
                             </div>
                         @endif
                         <div class="row mb-2">
-                            <div class="col-sm-4">
-                                <h1 class="m-0">Create Tutorials</h1>
+                            <div class="col-sm-6">
+                                <h1 class="m-0">Create {{ $heading['0']->heading }} Tutorials</h1>
                             </div>
-                            <div class="col-sm-4 form-group">
-                                <form action="/admin/web-training/create" method="post">
-                                    @csrf
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <input type="checkbox" name="status" id="">
-
-                                            </div>
-                                        </div>
-                                        <input type="text" class="form-control" aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default" name="heading"
-                                            placeholder="Heading" required>
-                                        <div class="input-group-prepend">
-                                            <button type="submit" class="btn btn-primary input-group-text"
-                                                id="inputGroup-sizing-default">Save</button>
-                                        </div>
-                                    </div>
-                                </form>
-
-                            </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                                     <li class="breadcrumb-item active">Create Tutorials</li>
@@ -146,39 +126,46 @@
                             <!-- /.Left col -->
                             <!-- right col (We are only adding the ID to make the widgets sortable)-->
                             <section class="col-lg-7 connectedSortable">
-                                <!-- Edit Image Section -->
-                                <div class="card ">
-                                    <div class="card-header ">
-                                        <h3 class="card-title">
-                                            <i class="fas fa-edit mr-1"></i>
-                                            Edit Images
-                                        </h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div style="height: 346px; width: 100%;">
+                                <form action="" method="post">
+                                    <!-- Edit Image Section -->
+                                    <div class="card ">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                <i class="fas fa-edit mr-1"></i>
+                                                Edit Images
+                                            </h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div style="height: 346px; width: 100%;">
+                                                @include('layouts.links.admin.tutorial.jcrop')
+                                                <img src="{{ asset('dist/img/edit profile.jpg') }}" alt=""
+                                                    id="image" style="height: 346px; width: 100%;">
+                                                <script src="/dist/js/tutorial/jcrop.js"></script>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- /.card -->
-                                <!-- Description card -->
-                                <div class="card">
-                                    <div class="card-header ">
-                                        <h3 class="card-title">
-                                            <i class="fas fa-edit mr-1"></i>
-                                            Description
-                                        </h3>
-                                    </div>
-                                    <div class="card-body" id="summernote">
-                                        <div style="height: 250px; width: 100%;">
+                                    <!-- /.card -->
+                                    <!-- Description card -->
+                                    <div class="card">
+                                        <div class="card-header ">
+                                            <h3 class="card-title">
+                                                <i class="fas fa-edit mr-1"></i>
+                                                Description
+                                            </h3>
+                                        </div>
+                                        <div class="card-body" id="summernote">
+                                            <div style="height: 250px; width: 100%;">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- /.card -->
+                                    <!-- /.card -->
+                                </form>
                             </section>
                             <!-- right col -->
                         </div>
                     </div>
                 </section>
+
             </div>
         </div>
     @endsection
@@ -210,7 +197,7 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         'type': 'post',
-                        'url': '/admin/web-training/create',
+                        'url': "{{ route('tutorial.create.store') }}",
                         'dataType': 'json',
                         'contentType': 'multipart/form-data',
                         'data': {
@@ -260,7 +247,6 @@
                 //     data.ff_info.RemoveFile();
                 // }
             });
-
         });
     </script>
     {{-- <!-- <script src="{{ asset('dist/js/imageupload/jquery-1.12.4.min.js') }}"></script> --> --}}

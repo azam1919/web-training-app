@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -16,6 +17,12 @@
     @Include('layouts.favicon')
     @Include('layouts.links.admin.head')
     @Include('layouts.links.datatable.head')
+    @Include('layouts.links.admin.tutorial.sweet_alert.sweetalert')
+    <script>
+        setTimeout(function() {
+            $('#success').slideUp('slow');
+        }, 10000);
+    </script>
 
 </head>
 
@@ -39,13 +46,18 @@
                                 </ol>
                             </div>
                             <div class="col-sm-6 mt-3">
-                                <a href="/admin/web-training/create" class="border px-2 btn"
+                                <a href="{{ route('heading.create.show') }}" class="border px-2 btn"
                                     style="background-color: #091E3E;color: white">
                                     Create Tutorial
                                 </a>
                             </div>
                         </div>
-
+                        @if (session('success'))
+                            <div class="alert alert-default-success alert-dismissible fade show" id="success"
+                                role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                     </div><!-- /.container-fluid -->
                 </section>
 
@@ -65,190 +77,72 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Browser</th>
-                                                    <th>Platform(s)</th>
-                                                    <th>Engine version</th>
-                                                    <th>CSS grade</th>
+                                                    <th>Heading</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet
-                                                        Explorer 4.0
-                                                    </td>
-                                                    <td>Win 95+</td>
-                                                    <td> 4</td>
-                                                    <td>X</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet
-                                                        Explorer 5.0
-                                                    </td>
-                                                    <td>Win 95+</td>
-                                                    <td>5</td>
-                                                    <td>C</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet
-                                                        Explorer 5.5
-                                                    </td>
-                                                    <td>Win 95+</td>
-                                                    <td>5.5</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet
-                                                        Explorer 6
-                                                    </td>
-                                                    <td>Win 98+</td>
-                                                    <td>6</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet Explorer 7</td>
-                                                    <td>Win XP SP2+</td>
-                                                    <td>7</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>AOL browser (AOL desktop)</td>
-                                                    <td>Win XP</td>
-                                                    <td>6</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Firefox 1.0</td>
-                                                    <td>Win 98+ / OSX.2+</td>
-                                                    <td>1.7</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Firefox 1.5</td>
-                                                    <td>Win 98+ / OSX.2+</td>
-                                                    <td>1.8</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Firefox 2.0</td>
-                                                    <td>Win 98+ / OSX.2+</td>
-                                                    <td>1.8</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Firefox 3.0</td>
-                                                    <td>Win 2k+ / OSX.3+</td>
-                                                    <td>1.9</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Camino 1.0</td>
-                                                    <td>OSX.2+</td>
-                                                    <td>1.8</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Camino 1.5</td>
-                                                    <td>OSX.3+</td>
-                                                    <td>1.8</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Netscape 7.2</td>
-                                                    <td>Win 95+ / Mac OS 8.6-9.2</td>
-                                                    <td>1.7</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Netscape Browser 8</td>
-                                                    <td>Win 98SE+</td>
-                                                    <td>1.7</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Netscape Navigator 9</td>
-                                                    <td>Win 98+ / OSX.2+</td>
-                                                    <td>1.8</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.0</td>
-                                                    <td>Win 95+ / OSX.1+</td>
-                                                    <td>1</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.1</td>
-                                                    <td>Win 95+ / OSX.1+</td>
-                                                    <td>1.1</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.2</td>
-                                                    <td>Win 95+ / OSX.1+</td>
-                                                    <td>1.2</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.3</td>
-                                                    <td>Win 95+ / OSX.1+</td>
-                                                    <td>1.3</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.4</td>
-                                                    <td>Win 95+ / OSX.1+</td>
-                                                    <td>1.4</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.5</td>
-                                                    <td>Win 95+ / OSX.1+</td>
-                                                    <td>1.5</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.6</td>
-                                                    <td>Win 95+ / OSX.1+</td>
-                                                    <td>1.6</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gecko</td>
-                                                    <td>Mozilla 1.7</td>
-                                                    <td>Win 98+ / OSX.1+</td>
-                                                    <td>1.7</td>
-                                                    <td>A</td>
-                                                </tr>
+                                                @php
+                                                    $count = 0;
+                                                @endphp
+                                                @foreach ($web_trainings as $web_training)
+                                                    <tr class="parent">
+                                                        <td>
+                                                            {{ ++$count }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $web_training->heading }}
+                                                        </td>
+                                                        <td>
+                                                            @if ($web_training->status == 1)
+                                                                <span class="badge badge-pill badge-success">
+                                                                    Active
+                                                                </span>
+                                                            @else
+                                                                <span class="badge badge-pill badge-danger">
+                                                                    InActive
+                                                                </span>
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button class="btn btn-secondary dropdown-toggle"
+                                                                    type="button" id="dropdownMenuButton"
+                                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false">
+                                                                    Action
+                                                                </button>
+                                                                <div class="dropdown-menu"
+                                                                    aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ route('tutorial.edit.show', ['id' => $web_training->id]) }}">Edit</a>
+                                                                    {{-- <a class="dropdown-item"
+                                                                        href="{{ route('tutorial.edit.show', ['id' => $web_training->id]) }}">Edit
+                                                                        Tutorial</a> --}}
+
+                                                                    <form action="{{ route('heading.delete') }}"
+                                                                        method="POST" class="ms-2" id="actionUrl">
+                                                                        @csrf
+                                                                        <input type="hidden" name="id" class="id"
+                                                                            value="{{ $web_training->id }}">
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger delete_tutorial dropdown-item">
+                                                                            Delete
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Rendering engine</th>
-                                                    <th>Browser</th>
-                                                    <th>Platform(s)</th>
-                                                    <th>Engine version</th>
-                                                    <th>CSS grade</th>
+                                                    <th>#</th>
+                                                    <th>Heading</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -266,7 +160,6 @@
                 <!-- /.content -->
             </div>
         </div>
-        
     @endsection
     @Include('layouts.links.datatable.foot')
 </body>
