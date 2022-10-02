@@ -79,7 +79,8 @@
                                                     <th>#</th>
                                                     <th>Heading</th>
                                                     <th>Status</th>
-                                                    <th>Action</th>
+                                                    <th style="width: 75px;">Action</th>
+                                                    <th style="width: 75px;">Copy</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -134,17 +135,19 @@
                                                                 </div>
                                                             </div>
                                                         </td>
+                                                        <td ><button class="btn btn-link">Copy URL</button></td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
-                                            <tfoot>
+                                            <!-- <tfoot>
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Heading</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
+                                                    <th></th>
                                                 </tr>
-                                            </tfoot>
+                                            </tfoot> -->
                                         </table>
                                     </div>
                                     <!-- /.card-body -->
