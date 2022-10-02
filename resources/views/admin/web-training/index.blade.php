@@ -97,11 +97,11 @@
                                                         <td>
                                                             @if ($web_training->status == 1)
                                                                 <span class="badge badge-pill badge-success">
-                                                                    Active
+                                                                    Publish
                                                                 </span>
                                                             @else
                                                                 <span class="badge badge-pill badge-danger">
-                                                                    InActive
+                                                                    Draft
                                                                 </span>
                                                             @endif
                                                         </td>

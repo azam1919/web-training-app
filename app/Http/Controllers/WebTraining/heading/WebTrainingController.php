@@ -71,20 +71,22 @@ class WebTrainingController extends Controller
     {
         if (FacadesRequest::isMethod('post')) {
             $heading_count =  WebTraining::where('heading', $request->heading)->get();
-            $heading_id =  WebTraining::where('heading', $request->heading)->first();
             $id = $request->id;
             $heading = $request->heading;
             $status = $request->status;
-            dd($id);
-            // dd($heading_count);
-            if ($heading_count->count() <= 1 && $id == $heading_id->id) {
+            // dd($heading_id);
+            // dd($heading_count->count());
+            if ($heading_count->count() <= 1 && $id == $heading_count[0]->id) {
                 WebTraining::where('id', $id)->update([
                     'heading' => $heading,
                     'status' => $status,
                 ]);
-                return redirect()->back()->with('success', 'Data Successfully Updated');
+                $array['heading'] = $heading;
+                $array['status'] = $status;
+                $array['success'] = "Data Updated Successfully";
+                return json_encode($array);
             } else {
-                return redirect()->back()->with('failed', 'Heading Name Already Exist');
+                echo "Heading Name Already Exist";
             }
         } else {
             return back();

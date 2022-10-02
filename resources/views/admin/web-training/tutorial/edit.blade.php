@@ -39,13 +39,14 @@
             outline: none;
         }
     </style>
+    @Include('layouts.links.admin.tutorial.select.selectpciker')
+    @Include('layouts.links.admin.tutorial.sweet_alert.sweetalert')
     <script>
         setTimeout(function() {
             $('#success').slideUp('slow');
-        }, 10000);
+        }, 5000);
     </script>
-    @Include('layouts.links.admin.tutorial.select.selectpciker')
-    @Include('layouts.links.admin.tutorial.sweet_alert.sweetalert')
+
 
     <script src="/dist/js/tutorial/heading.js"></script>
 </head>
@@ -101,12 +102,13 @@
                                             </select>
                                         </div>
                                         <input type="text" class="form-control" id="heading"
-                                            value="{{ $web_training->heading }}" placeholder="Recipient's username"
+                                            value="{{ $web_training->heading }}" placeholder="..."
                                             aria-label="Recipient's username" aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-secondary update_heading"
                                                 style="background-color: #091e3e">Update</button>
                                         </div>
+                                        <span id="heading_error"></span>
                                     </form>
                                 </div>
                                 <div class="col-sm-4">
@@ -140,7 +142,8 @@
                                                         <div class="col-lg-12"
                                                             style="height: 350px; overflow: hidden; overflow-y: scroll;">
                                                             <div class="fallback">
-                                                                <input id="fancy_upload" type="file" name="file"
+                                                                <input id="fancy_upload" type="file" id="file"
+                                                                    name="file"
                                                                     accept=".jpg, .png, image/jpeg, image/png" multiple>
                                                             </div>
                                                         </div>
@@ -210,8 +213,6 @@
                         </div>
                     </section>
                 @endforeach
-
-
             </div>
         </div>
     @endsection
@@ -250,8 +251,7 @@
                             'file': $('#fancy_upload').val(),
                         },
                         'cache': false,
-                        'processData': false,
-                        'contentType': false,
+                        'processData': true,
                         'success': function(response) {
                             alert('Yes')
                             // SubmitUpload();
