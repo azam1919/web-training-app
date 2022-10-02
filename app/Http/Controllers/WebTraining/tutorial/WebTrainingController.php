@@ -34,13 +34,13 @@ class WebTrainingController extends Controller
     public function store(Request $request)
     {
         if (FacadesRequest::isMethod('post')) {
-            if ($request->hasFile('file')) {
+            if ($request->hasFile('fancy_upload')) {
                 // dd(Session::get('web_tr_id'));
-                $file = $request->file('file');
+                $file = $request->file('fancy_upload');
                 $extension = $file->getClientOriginalExtension();
                 $file_original_name = $file->getClientOriginalName();
                 $filename = $file_original_name . '.' . $extension;
-                dd($filename);
+                // dd($filename);
 
                 $file->move('dist/img/tutorial', $filename);
                 if (!empty(Session::get('web_tr_id'))) {
@@ -49,10 +49,11 @@ class WebTrainingController extends Controller
                         'image' => $filename,
                         'web_tr_id' => $web_tr_id
                     ]);
+                    return json_encode(true);
                 }
             }
         } else {
-            return back();
+            return json_encode(false);
         }
     }
     public function storing(Request $request)
@@ -77,9 +78,9 @@ class WebTrainingController extends Controller
     public function update(Request $request)
     {
         if (FacadesRequest::isMethod('post')) {
-            if ($request->hasFile('file')) {
+            if ($request->hasFile('fancy_upload')) {
                 // dd(Session::get('web_tr_id'));
-                $file = $request->file('file');
+                $file = $request->file('fancy_upload');
                 $extension = $file->getClientOriginalExtension();
                 $file_original_name = $file->getClientOriginalName();
                 $filename = $file_original_name . '.' . $extension;
