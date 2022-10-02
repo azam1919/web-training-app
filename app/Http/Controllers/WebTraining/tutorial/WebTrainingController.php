@@ -40,6 +40,8 @@ class WebTrainingController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $file_original_name = $file->getClientOriginalName();
                 $filename = $file_original_name . '.' . $extension;
+                dd($filename);
+
                 $file->move('dist/img/tutorial', $filename);
                 if (!empty(Session::get('web_tr_id'))) {
                     $web_tr_id = Session::get('web_tr_id');
