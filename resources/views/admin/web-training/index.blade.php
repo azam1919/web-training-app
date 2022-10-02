@@ -135,7 +135,7 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td ><button class="btn btn-link">Copy URL</button></td>
+                                                        <td><button class="btn btn-link">Copy URL</button></td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

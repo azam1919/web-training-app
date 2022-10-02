@@ -167,9 +167,11 @@
                         </div>
                     </div>
                 </section>
-
             </div>
         </div>
+        <script>
+            
+        </script>
     @endsection
     @Include('layouts.links.admin.foot')
     <script>
