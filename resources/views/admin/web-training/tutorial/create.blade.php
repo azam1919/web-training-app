@@ -59,6 +59,7 @@
                             <div class="alert alert-default-success alert-dismissible fade show" id="success"
                                 role="alert">
                                 {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         @endif
                         <div class="row mb-2">
