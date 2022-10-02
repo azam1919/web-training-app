@@ -10,6 +10,7 @@
     <title>Web Training | Edit Tutorials</title>
     {{-- @Include('layouts.favicon') --}}
     @Include('layouts.links.admin.head')
+    @Include('layouts.links.admin.tutorial.sweet_alert.sweetalert')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote-lite.min.css') }}">
@@ -39,8 +40,7 @@
             outline: none;
         }
     </style>
-    @Include('layouts.links.admin.tutorial.select.selectpciker')
-    @Include('layouts.links.admin.tutorial.sweet_alert.sweetalert')
+
     <script>
         setTimeout(function() {
             $('#success').slideUp('slow');
@@ -79,10 +79,18 @@
                             @enderror
 
                             <div class="row mb-2">
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     <h1 class="m-0">Edit Tutorials</h1>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
+                                    <ol class="breadcrumb float-sm-right">
+                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                        <li class="breadcrumb-item active">Create Tutorials</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5">
                                     <form action="{{ route('heading.edit.update') }}" class="input-group" method="post"
                                         id="actionUrl">
                                         @csrf
@@ -104,18 +112,13 @@
                                         <input type="text" class="form-control" id="heading"
                                             value="{{ $web_training->heading }}" placeholder="..."
                                             aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
+
+                                        <div class="input-group-append ml-3">
                                             <button type="submit" class="btn btn-secondary update_heading"
                                                 style="background-color: #091e3e">Update</button>
                                         </div>
-                                        <span id="heading_error"></span>
+                                        <span id="heading_error" class="invalid-feedback"></span>
                                     </form>
-                                </div>
-                                <div class="col-sm-4">
-                                    <ol class="breadcrumb float-sm-right">
-                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active">Create Tutorials</li>
-                                    </ol>
                                 </div>
                             </div>
                         </div>

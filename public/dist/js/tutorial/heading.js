@@ -29,19 +29,22 @@ $(document).ready(function () {
                         // alert('Heading Name Already Exist');
                         $('#heading_error').html(response);
                         $('#heading_error').css('color', 'red');
+                        $('#heading_error').show();
                         window.setInterval(function () {
                             $('#heading_error').slideUp('slow');
-                        }, 3000);
+                        }, 4000);
                     } else {
                         response = JSON.parse(response);
                         // console.log(response.heading);
                         $("#heading").val(response.heading);
                         $("#status").val(response.status);
+                        $('#heading_error').show();
                         $('#heading_error').html(response.success);
                         $('#heading_error').css('color', 'green');
+
                         window.setInterval(function () {
                             $('#heading_error').slideUp('slow');
-                        }, 3000);
+                        }, 4000);
 
                     }
                 },
