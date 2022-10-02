@@ -56,7 +56,8 @@
                 <div class="content-header">
                     <div class="container-fluid">
                         @if (session('success'))
-                            <div id="success" class="alert alert-default-success alert-dismissible fade show" role="alert">
+                            <div id="success" class="alert alert-default-success alert-dismissible fade show"
+                                role="alert">
                                 <strong>{{ session('success') }}</strong>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -98,8 +99,11 @@
                                                     <div class="col-lg-12"
                                                         style="height: 350px; overflow: hidden; overflow-y: scroll;">
                                                         <div class="fallback">
-                                                            <input id="fancy_upload" type="file" name="file"
-                                                                accept=".jpg, .png, image/jpeg, image/png" multiple>
+                                                            <form action="" id="formdata">
+                                                                @csrf
+                                                                <input id="fancy_upload" type="file" name="fancy_upload"
+                                                                    accept=".jpg, .png, image/jpeg, image/png" multiple>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -172,85 +176,6 @@
         </div>
     @endsection
     @Include('layouts.links.admin.foot')
-    <script>
-        $(document).ready(function() {
-            var token;
-            // var file = $('#fancy_upload').val();
-            $('#fancy_upload').FancyFileUpload({
-
-                // send data to this url
-                // 'url': 'admin/web-training/create',
-
-                // key-value pairs to send to the server
-                'params': {
-                    action: 'fileuploader'
-                },
-
-                // editable file name?
-                'edit': true,
-
-                // max file size
-                'maxfilesize': -1,
-
-                // called whenever starting the upload
-                'startupload': function(SubmitUpload, e, data) {
-                    $.ajax({
-                        'headers': {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        'type': 'post',
-                        'url': "{{ route('tutorial.create.store') }}",
-                        'dataType': 'json',
-                        'contentType': 'multipart/form-data',
-                        'data': {
-                            'file': $('#fancy_upload').val(),
-                        },
-                        'cache': false,
-                        'processData': false,
-                        'contentType': false,
-                        'success': function(response) {
-                            alert('Yes')
-                            // SubmitUpload();
-                        }
-                    });
-                },
-
-                // called whenever progress is up<a href="https://www.jqueryscript.net/time-clock/">date</a>d
-                'continueupload': function(e, data) {
-                    // do something
-                },
-
-                // called whenever an upload has been cancelled
-                'uploadcancelled': function(e, data) {
-                    console.log('Are You your');
-                    alert('Are You your');
-                },
-
-                // called whenever an upload has successfully completed
-                'uploadcompleted': function(e, data) {
-                    // do something
-                },
-
-                // jQuery File Upload options
-                'fileupload': {
-                    singleFileUploads: true
-                },
-
-                // translation strings here
-                'lang<a href="https://www.jqueryscript.net/tags.php?/map/">map</a>': {}
-
-                // 'continueupload': function(e, data) {
-                //     var ts = Math.round(new Date().getTime() / 1000);
-
-                //     // Alternatively, just call data.abort() or return false here to terminate the upload but leave the UI elements alone.
-                //     if (token.expires < ts) data.ff_info.RemoveFile();
-                // },
-                // 'uploadcompleted': function(e, data) {
-                //     data.ff_info.RemoveFile();
-                // }
-            });
-        });
-    </script>
     {{-- <!-- <script src="{{ asset('dist/js/imageupload/jquery-1.12.4.min.js') }}"></script> --> --}}
     <script src="{{ asset('dist/js/imageupload/jquery.ui.widget.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.fileupload.js') }}"></script>
@@ -258,6 +183,31 @@
     <script src="{{ asset('dist/js/imageupload/jquery.fancy-fileupload.js') }}"></script>
     <script src="{{ asset('dist/js/pages/tutorial/summernote-lite.min.js') }}"></script>
     <script src="{{ asset('dist/js/pages/tutorial/summer-note.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            var token;
+            // var file = $('#fancy_upload').val();
+
+            $('#fancy_upload').FancyFileUpload({
+
+                // send data to this url
+                'url': "{{ route('tutorial.create.store') }}",
+
+                // key-value pairs to send to the server
+                'params': {
+                    _token: $('#formdata').find('input[name="_token"]').first().val(),
+                },
+
+                // editable file name?
+                'edit': true,
+
+                // max file size
+                'maxfilesize': -1,
+                'retries': 0,
+
+            });
+        });
+    </script>
 
 </body>
 

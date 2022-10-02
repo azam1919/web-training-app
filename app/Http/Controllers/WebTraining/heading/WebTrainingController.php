@@ -74,9 +74,16 @@ class WebTrainingController extends Controller
             $id = $request->id;
             $heading = $request->heading;
             $status = $request->status;
+            $heading_id = '';
+            if (isset($heading_count[0]->id)) {
+                $heading_id = $heading_count[0]->id;
+            }
+
             // dd($heading_id);
             // dd($heading_count->count());
-            if ($heading_count->count() <= 1 && (!empty($heading_count[0]->id) || $id == !empty($heading_count[0]->id))) {
+            if (($heading_count->count() <= 1) && (($heading_id == '') || ($id == $heading_id))) {
+                // dd($heading_id);
+
                 WebTraining::where('id', $id)->update([
                     'heading' => $heading,
                     'status' => $status,

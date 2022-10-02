@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-5">
+                                <div class="col-sm-12">
                                     <form action="{{ route('heading.edit.update') }}" class="input-group" method="post"
                                         id="actionUrl">
                                         @csrf
@@ -145,9 +145,12 @@
                                                         <div class="col-lg-12"
                                                             style="height: 350px; overflow: hidden; overflow-y: scroll;">
                                                             <div class="fallback">
-                                                                <input id="fancy_upload" type="file" id="file"
-                                                                    name="file"
-                                                                    accept=".jpg, .png, image/jpeg, image/png" multiple>
+                                                                <form action="" id="formdata">
+                                                                    @csrf
+                                                                    <input id="fancy_upload" type="file"
+                                                                        name="fancy_upload"
+                                                                        accept=".jpg, .png, image/jpeg, image/png" multiple>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -220,92 +223,77 @@
         </div>
     @endsection
     @Include('layouts.links.admin.foot')
-    <script>
-        $(document).ready(function() {
-            var token;
-            // var file = $('#fancy_upload').val();
-            $('#fancy_upload').FancyFileUpload({
 
-                // send data to this url
-                // 'url': 'admin/web-training/create',
-
-                // key-value pairs to send to the server
-                'params': {
-                    action: 'fileuploader'
-                },
-
-                // editable file name?
-                'edit': true,
-
-                // max file size
-                'maxfilesize': -1,
-
-                // called whenever starting the upload
-                'startupload': function(SubmitUpload, e, data) {
-                    $.ajax({
-                        'headers': {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        'type': 'post',
-                        'url': "{{ route('tutorial.create.store') }}",
-                        'dataType': 'json',
-                        'contentType': 'multipart/form-data',
-                        'data': {
-                            'file': $('#fancy_upload').val(),
-                        },
-                        'cache': false,
-                        'processData': true,
-                        'success': function(response) {
-                            alert('Yes')
-                            // SubmitUpload();
-                        }
-                    });
-                },
-
-                // called whenever progress is up<a href="https://www.jqueryscript.net/time-clock/">date</a>d
-                'continueupload': function(e, data) {
-                    // do something
-                },
-
-                // called whenever an upload has been cancelled
-                'uploadcancelled': function(e, data) {
-                    console.log('Are You your');
-                    alert('Are You your');
-                },
-
-                // called whenever an upload has successfully completed
-                'uploadcompleted': function(e, data) {
-                    // do something
-                },
-
-                // jQuery File Upload options
-                'fileupload': {
-                    singleFileUploads: true
-                },
-
-                // translation strings here
-                'lang<a href="https://www.jqueryscript.net/tags.php?/map/">map</a>': {}
-
-                // 'continueupload': function(e, data) {
-                //     var ts = Math.round(new Date().getTime() / 1000);
-
-                //     // Alternatively, just call data.abort() or return false here to terminate the upload but leave the UI elements alone.
-                //     if (token.expires < ts) data.ff_info.RemoveFile();
-                // },
-                // 'uploadcompleted': function(e, data) {
-                //     data.ff_info.RemoveFile();
-                // }
-            });
-        });
-    </script>
-    {{-- <!-- <script src="{{ asset('dist/js/imageupload/jquery-1.12.4.min.js') }}"></script> --> --}}
+    <script src="{{ asset('dist/js/imageupload/jquery-1.12.4.min.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.ui.widget.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.fileupload.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.fancy-fileupload.js') }}"></script>
     <script src="{{ asset('dist/js/pages/tutorial/summernote-lite.min.js') }}"></script>
     <script src="{{ asset('dist/js/pages/tutorial/summer-note.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            var token;
+            // var file = $('#fancy_upload').val();
 
+            $('#fancy_upload').FancyFileUpload({
+
+                // send data to this url
+                'url': "{{ route('tutorial.edit.update') }}",
+
+                // key-value pairs to send to the server
+                'params': {
+                    _token: $('#formdata').find('input[name="_token"]').first().val(),
+                },
+
+                // editable file name?
+                'edit': false,
+
+                // max file size
+                'maxfilesize': 1000000,
+                'retries': 0,
+                'showpreview': function(e, data, preview, previewclone) {
+                    // do something
+                },
+                'hidepreview': function(e, data, preview, previewclone) {
+                    // do something
+                },
+                'preinit': null,
+                'postinit': null,
+                'added': function(e, data) {
+                    // do something
+                },
+                'startupload': function(SubmitUpload, e, data) {
+                    // do something
+                },
+                'continueupload': function(e, data) {
+                    // do something
+                },
+                'uploadcancelled': function(e, data) {
+                    // do something
+                },
+
+                // called whenever an upload has successfully completed
+                'uploadcompleted': function(e, data) {
+                    // do something
+
+                },
+
+
+
+                // jQuery File Upload options
+
+                'fileupload': {},
+
+
+
+
+
+
+
+            });
+        });
+    </script>
 </body>
 
 </html>
