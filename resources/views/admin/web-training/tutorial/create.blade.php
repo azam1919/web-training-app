@@ -56,10 +56,11 @@
                 <div class="content-header">
                     <div class="container-fluid">
                         @if (session('success'))
-                            <div class="alert alert-default-success alert-dismissible fade show" id="success"
-                                role="alert">
-                                {{ session('success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <div id="success" class="alert alert-default-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session('success') }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
                         @endif
                         <div class="row mb-2">
