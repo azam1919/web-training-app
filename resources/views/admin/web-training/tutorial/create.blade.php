@@ -142,7 +142,7 @@
                                     <div class="card-body">
                                         <div style="height: 346px; width: 100%;">
                                             @include('layouts.links.admin.tutorial.jcrop')
-                                            <img src="{{ asset('dist/img/edit profile.jpg') }}" alt="" id="image" style="height: 346px; width: 100%;">
+                                            <img src="{{ asset('dist/img/edit profile.jpg') }}" alt="" id="image" style="height: 346px; width: 100%;  object-fit: cover;">
                                             <script src="/dist/js/tutorial/jcrop.js"></script>
                                         </div>
                                     </div>
