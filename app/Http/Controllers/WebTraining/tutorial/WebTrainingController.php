@@ -36,14 +36,12 @@ class WebTrainingController extends Controller
         if (FacadesRequest::isMethod('post')) {
             if ($request->hasFile('fancy_upload')) {
                 // dd(Session::get('web_tr_id'));
-                $file = $request->file('fancy_upload');
-                $extension = $file->getClientOriginalExtension();
-                $file_original_name = $file->getClientOriginalName();
-                $filename = $file_original_name . '.' . $extension;
-                // dd($filename);
-
-                $file->move('dist/img/tutorial', $filename);
                 if (!empty(Session::get('web_tr_id'))) {
+                    $file = $request->file('fancy_upload');
+                    $extension = $file->getClientOriginalExtension();
+                    $file_original_name = $file->getClientOriginalName();
+                    $filename = $file_original_name . '.' . $extension;
+                    $file->move('dist/img/tutorial', $filename);
                     $web_tr_id = Session::get('web_tr_id');
                     WebTrainingAsset::insert([
                         'image' => $filename,

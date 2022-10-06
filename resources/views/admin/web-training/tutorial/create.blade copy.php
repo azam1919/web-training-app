@@ -99,9 +99,11 @@
                                                     <div class="col-lg-12"
                                                         style="height: 350px; overflow: hidden; overflow-y: scroll;">
                                                         <div class="fallback">
-                                                            <form action="" id="formdata"
+                                                            <form action="" id="formdata" method="post"
                                                                 enctype="multipart/form-data">
                                                                 @csrf
+                                                                <input type="hidden" name="action"
+                                                                    value="{{ route('tutorial.create.store') }}">
                                                                 <input id="fancy_upload" type="file" name="fancy_upload"
                                                                     accept=".jpg, .png, image/jpeg, image/png" multiple>
                                                             </form>
@@ -186,7 +188,11 @@
     <script src="{{ asset('dist/js/pages/tutorial/summer-note.js') }}"></script>
     <script>
         $(document).ready(function() {
+            var token;
+            // var file = $('#fancy_upload').val();
+
             $('#fancy_upload').FancyFileUpload({
+
                 // send data to this url
                 'url': "{{ route('tutorial.create.store') }}",
 
@@ -199,28 +205,19 @@
                 'edit': true,
 
                 // max file size
-                'maxfilesize': -1,
-
-
-                // the number of retries to perform before giving up
+                // 'maxfilesize': -1,
+                // 'maxNumberOfFiles': 6,
                 'retries': 0,
+                // 'minNumberOfFiles': 2,
+                // 'option': {
+                //     maxNumberOfFiles: 10
+                // },
+                'fileupload': {
+                    // maxNumberOfFiles: 10,
+                    singleFileUploads: false,
 
-                // A valid callback function that is called during initialization to allow for last second changes to the settings.
-                // Useful for altering fileupload options on the fly.
-                'preinit': null,
-
-                // A valid callback function that is called at the end of initialization of each instance.
-                'postinit': null,
-
-                // called for each item after it has been added to the DOM
-                'added': function(e, data) {
-                    // do something
                 },
 
-                // called whenever starting the upload
-                'startupload': function(SubmitUpload, e, data) {
-                    // do something
-                }
 
             });
         });
