@@ -24,38 +24,85 @@ class WebTrainingController extends Controller
     {
         if (FacadesRequest::isMethod('get')) {
             $web_tr_id = Session::get('web_tr_id');
+            $web_trainings_asset = WebTrainingAsset::all();
+            // dd($web_trainings_asset);
             $heading = WebTraining::where('id', $web_tr_id)->select('heading')->get();
             // dd($heading->toArray());
-            return view('admin.web-training.tutorial.create', ['heading' => $heading]);
+            return view('admin.web-training.tutorial.create', ['heading' => $heading , 'web_trainings_asset' => json_decode($web_trainings_asset, true)]);
         } else {
             return back();
         }
     }
     public function store(Request $request)
     {
-        if (FacadesRequest::isMethod('post')) {
-            if ($request->hasFile('fancy_upload')) {
-                // dd(Session::get('web_tr_id'));
-                $file = $request->file('fancy_upload');
-                $extension = $file->getClientOriginalExtension();
-                $file_original_name = $file->getClientOriginalName();
-                $filename = $file_original_name . '.' . $extension;
-                // dd($filename);
-
-                $file->move('dist/img/tutorial', $filename);
-                if (!empty(Session::get('web_tr_id'))) {
-                    $web_tr_id = Session::get('web_tr_id');
-                    WebTrainingAsset::insert([
-                        'image' => $filename,
-                        'web_tr_id' => $web_tr_id
-                    ]);
-                    return json_encode(true);
-                }
-            }
-        } else {
-            return json_encode(false);
+        // return $request;
+        $fancy_upload = array(); 
+        if($request->hasfile('fancy_upload'))
+        {
+           foreach($request->file('fancy_upload') as $file)
+           {
+               $image_name = md5(rand(1000,10000));
+               $exl = strtolower($file->getClientOriginalExtension());
+               $image_full_name = $image_name.'.'.$exl;
+               $upload_path = 'public/dist/img/tutorial/';
+               $image_url = $upload_path.$image_full_name;
+               $response = $file->move($upload_path,$image_full_name);
+            //    return $response;
+            //    $name = time().'.'.$file->extension();
+            //    $file->move(public_path().'/dist/img/tutorial', $name);  
+            //    $data[] = $name;  
+                $fancy_upload[] = $image_url;
+           }
         }
-    }
+
+
+        WebTrainingAsset::insert([
+            'image' => implode('|' , $fancy_upload),
+            'web_tr_id' => 9,
+            'latitude' => null,
+            'longitude' => null,
+            'height' => null
+
+        ]);
+
+        // $web_trainings= new WebTrainingAsset();
+        // return $web_trainings;
+        // $web_trainings->web_tr_id =  WebTraining::with('web_trainings_assets')->where('id', $request->id)->get();
+        // $web_trainings->web_tr_id = 9;
+        // $web_trainings->image=json_encode($data);
+        // $web_trainings->image = $request->implode('|' , $fancy_upload); 
+        // $web_trainings->save();
+
+
+       return back()->with('success', 'Your files has been successfully added');
+       
+        // Azam's code 
+
+        // if (FacadesRequest::isMethod('post')) {
+        //     if ($request->hasFile('fancy_upload')) {
+        // dd(Session::get('web_tr_id'));
+        // $file = $request->file('fancy_upload');
+        // $extension = $file->getClientOriginalExtension();
+        // $file_original_name = $file->getClientOriginalName();
+        // $filename = $file_original_name . '.' . $extension;
+        // dd($filename);
+
+        //         $file->move('dist/img/tutorial', $filename);
+        //         if (!empty(Session::get('web_tr_id'))) {
+        //             $web_tr_id = Session::get('web_tr_id');
+        //             WebTrainingAsset::insert([
+        //                 'image' => $filename,
+        //                 'web_tr_id' => $web_tr_id
+        //             ]);
+        //             return json_encode(true);
+        //         }
+        //     }
+        // } else {
+        //     return json_encode(false);
+        // }
+        // Azam's code end
+   }
+
     public function storing(Request $request)
     {
         if (FacadesRequest::isMethod('get')) {

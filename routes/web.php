@@ -56,7 +56,7 @@ Route::prefix('admin')->group(function () {
         });
         Route::prefix('tutorial')->group(function () {
             Route::get('/create', [WebTrainingController::class, 'show'])->name('tutorial.create.show');
-            Route::post('/create', [WebTrainingController::class, 'store'])->name('tutorial.create.store');
+            Route::post('/create/store', [WebTrainingController::class, 'store'])->name('tutorial.create.store');
             Route::get('/edit/{id}', [WebTrainingController::class, 'edit'])->name('tutorial.edit.show');
             Route::post('/edit', [WebTrainingController::class, 'update'])->name('tutorial.edit.update');
         });
