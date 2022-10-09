@@ -30,6 +30,7 @@
             });
         });
     </script>
+<<<<<<< HEAD
 
     <style>
         body {
@@ -59,6 +60,56 @@
         {{-- <div id="carbon-block" style="margin:30px auto" align="center"></div> --}}
         <div id="uploader"></div>
     </div>
+=======
+      <script>
+      var uppy = Uppy.Core()
+        .use(Uppy.Dashboard, {
+          inline: true,
+          target: '#drag-drop-area'
+        })
+        .use(Uppy.Tus, {endpoint: 'https://master.tus.io/files/'}) //you can put upload URL here, where you want to upload images
+
+      uppy.on('complete', (result) => {
+        console.log('Upload complete! We’ve uploaded these files:', result.successful)
+      })
+    </script>
+
+    <!-- <script>
+        $(document).ready(function() {
+            if (window.File && window.FileList && window.FileReader) {
+                $("#files").on("change", function(e) {
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function(e) {
+                            var file = e.target;
+                            $("<span class=\"pip\">" +
+                                "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+                                "<br/><span class=\"remove\">Remove image</span>" +
+                                "</span>").insertAfter("#files");
+                            $(".remove").click(function() {
+                                $(this).parent(".pip").remove();
+                            });
+
+                            // Old code here
+                            /*$("<img></img>", {
+                              class: "imageThumb",
+                              src: e.target.result,
+                              title: file.name + " | Click to remove"
+                            }).insertAfter("#files").click(function(){$(this).remove();});*/
+
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                });
+            } else {
+                alert("Your browser doesn't support to File API")
+            }
+        });
+    </script> -->
+>>>>>>> c89f3d0df1a6576c0f81ac7397c8733d2eae8bdf
 </body>
 
 </html>

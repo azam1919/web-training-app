@@ -11,7 +11,7 @@
     {{-- @Include('layouts.favicon') --}}
     @Include('layouts.links.admin.head')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link href="https://releases.transloadit.com/uppy/v3.0.1/uppy.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote-lite.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote.min.css') }}">
     <style>
@@ -98,13 +98,13 @@
                                                 <div class="row">
                                                     <div class="col-lg-12"
                                                         style="height: 350px; overflow: hidden; overflow-y: scroll;">
-                                                        <div id="drag-drop-area"></div>
-                                                        <!-- <div class="fallback">
-                                                                                                                                                                                                                                                                                    <form action="" id="formdata">
-                                                                                                                                                                                                                                                                                        <input id="fancy_upload" type="file" name="fancy_upload"
-                                                                                                                                                                                                                                                                                            accept=".jpg, .png, image/jpeg, image/png" multiple>
-                                                                                                                                                                                                                                                                                    </form>
-                                                                                                                                                                                                                                                                                </div> -->
+                                                        <div class="fallback">
+                                                            <form action="" id="formdata">
+                                                                @csrf
+                                                                <input id="fancy_upload" type="file" name="fancy_upload"
+                                                                    accept=".jpg, .png, image/jpeg, image/png" multiple>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -144,9 +144,8 @@
                                         <div class="card-body">
                                             <div style="height: 346px; width: 100%;">
                                                 @include('layouts.links.admin.tutorial.jcrop')
-                                                <img src="{{ asset('dist/img/edit profile.jpg') }}" alt="image"
-                                                    class="img-fluid" id="image"
-                                                    style="height: 346px; width: 100%;  object-fit: cover;">
+                                                <img src="{{ asset('dist/img/edit profile.jpg') }}" alt=""
+                                                    id="image" style="height: 346px; width: 100%;">
                                                 <script src="/dist/js/tutorial/jcrop.js"></script>
                                             </div>
                                         </div>
@@ -178,38 +177,19 @@
     @endsection
     @Include('layouts.links.admin.foot')
     {{-- <!-- <script src="{{ asset('dist/js/imageupload/jquery-1.12.4.min.js') }}"></script> --> --}}
-    <script src="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.ui.widget.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.fileupload.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.fancy-fileupload.js') }}"></script>
     <script src="{{ asset('dist/js/pages/tutorial/summernote-lite.min.js') }}"></script>
     <script src="{{ asset('dist/js/pages/tutorial/summer-note.js') }}"></script>
-    <script type="module">
-      import {Uppy, Dashboard, Tus} from "https://releases.transloadit.com/uppy/v3.0.1/uppy.min.mjs"
-      var uppy = new Uppy()
-        .use(Dashboard, {
-          inline: true,
-          target: '#drag-drop-area'
-        })
-        .use(Tus, {
-            endpoint: "{{ route('tutorial.create.store') }}",
-            formData: true,
-            fieldName: 'files[]',
-            headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-},
-// autoRetry: false,
-        })
-
-      uppy.on('complete', (result) => {
-        console.log('Upload complete! We’ve uploaded these files:', result.successful)
-      })
-    </script>
-    <!-- <script>
+    <script>
         $(document).ready(function() {
+            var token;
+            // var file = $('#fancy_upload').val();
+
             $('#fancy_upload').FancyFileUpload({
+
                 // send data to this url
                 'url': "{{ route('tutorial.create.store') }}",
 
@@ -223,31 +203,11 @@
 
                 // max file size
                 'maxfilesize': -1,
-
-
-                // the number of retries to perform before giving up
                 'retries': 0,
-
-                // A valid callback function that is called during initialization to allow for last second changes to the settings.
-                // Useful for altering fileupload options on the fly.
-                'preinit': null,
-
-                // A valid callback function that is called at the end of initialization of each instance.
-                'postinit': null,
-
-                // called for each item after it has been added to the DOM
-                'added': function(e, data) {
-                    // do something
-                },
-
-                // called whenever starting the upload
-                'startupload': function(SubmitUpload, e, data) {
-                    // do something
-                }
 
             });
         });
-    </script> -->
+    </script>
 
 </body>
 

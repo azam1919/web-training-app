@@ -34,10 +34,10 @@ class WebTrainingController extends Controller
     public function store(Request $request)
     {
         if (FacadesRequest::isMethod('post')) {
-            if ($request->hasFile('fancy_upload')) {
+            if ($request->hasFile('files')) {
                 // dd(Session::get('web_tr_id'));
                 if (!empty(Session::get('web_tr_id'))) {
-                    $file = $request->file('fancy_upload');
+                    $file = $request->file('files');
                     $extension = $file->getClientOriginalExtension();
                     $file_original_name = $file->getClientOriginalName();
                     $filename = $file_original_name . '.' . $extension;
