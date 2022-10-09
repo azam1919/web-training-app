@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class WebTrainingAsset extends Model
 {
+    public $timestamps = false;
     protected $fillable = ['id', 'image', 'latitude', 'longitude', 'height', 'width', 'web_tr_id'];
     protected $table = 'web_trainings_assets';
     use HasFactory;

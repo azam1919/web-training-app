@@ -20,6 +20,7 @@ class CreateWebTrainingsAssetsTable extends Migration
             $table->decimal('longitude')->nullable();
             $table->string('height')->nullable();
             $table->string('width')->nullable();
+            $table->string('description')->nullable();
             $table->unsignedBigInteger('web_tr_id')->index('web_tr_id');
             $table->foreign('web_tr_id')->references('id')->on('web_trainings')->onDelete('cascade');
             $table->timestamps();
