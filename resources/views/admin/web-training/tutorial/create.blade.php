@@ -199,16 +199,26 @@
                                 <div class="card-body">
                                     <div class="tab-content p-0">
                                         <div class="chart " id="revenue-chart" style="position: relative; height: 315px; overflow-y: scroll;">
-                                            <ul style="list-style: none;" id="imagelist">
-                                                @foreach ($images as $get)
-                                                <li class="my-3 row w-auto">
-                                                    <img src="{{ URL::to($get->image) }}" alt="image" width="50px" height="50px" style="object-fit: contain;" class="rounded" />
-                                                    <input type="hidden" class="upload_img_id" value="{{ $get->id }}">
-                                                    <input type="hidden" class="upload_description" value="{{ $get->description }}">
-                                                    <span>{{ $get->image }} </span>
-                                                </li>
-                                                @endforeach
-                                            </ul>
+                                        @foreach($images as $get)
+                                            <ul class="list-group" style="list-style: none;" id="imagelist">
+                                                <!-- Images List Start Here -->
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <img src="{{ URL::to($get->image) }}" alt="image" width="50px" height="50px" style="object-fit: contain;" class="rounded" />
+                                                        <input type="hidden" class="upload_img_id" value="{{ $get->id  }} ">
+                                                        <input type="hidden" class="upload_description" value="{{ $get->description }}">
+                                                        <span class="badge badge-primary badge-pill">X</span>
+                                                    </li>
+                                            </ul> 
+                                         @endforeach
+                                         <!-- <ul> -->
+                                                <!-- Images List Ends here -->
+                                                <!-- Foreach Start Here -->
+                                                <!-- <li class="my-3 row w-auto">
+                                                    <img src="URL::to($get->image)" alt="image" width="50px" height="50px" style="object-fit: contain;" class="rounded" /> -->
+                                                    <!-- <span>$get-image here </span> -->
+                                                <!-- </li>  -->
+                                                <!-- Foreach Ends here  -->
+                                            <!-- </ul> -->
                                         </div>
                                     </div>
                                 </div>
@@ -290,12 +300,8 @@
                 },
                 formData: true,
                 fieldName: 'fancy_upload[]',
-
             })
-        .use(Tus, {
-                endpoint: 'https://tusd.tusdemo.net/files/', // use your tus endpoint here
-                retryDelays: [0, 1000, 3000, 5000],
-            })
+        //    Tus here 
             .use(GoldenRetriever)
         uppy.on('complete', (result) => {
             console.log('Upload complete! We’ve uploaded these files:', result.successful);
@@ -303,6 +309,25 @@
         });
     </script>
     <!-- JQUery draggable -->
+    
+    <!-- JCrop -->
+    <script type="module">
+        import Cropper from 'cropperjs';
+        const image = document.getElementById('image');
+        const cropper = new Cropper(image, {
+            onChange: updatePreview,
+            onSelect: updatePreview,
+            onRelease: resetCoords,
+            aspectRatio: 16 / 9,
+
+            crop(event) {},
+            function() {
+                jCropAPI = this
+                jCropAPI.removeAttr('style');
+            }
+        });
+    </script>
+    @endsection
     <script>
         $(document).ready(function() {
             $('#imagelist li img').click(function() {
@@ -330,24 +355,6 @@
             });
         });
     </script>
-    <!-- JCrop -->
-    <script type="module">
-        import Cropper from 'cropperjs';
-        const image = document.getElementById('image');
-        const cropper = new Cropper(image, {
-            onChange: updatePreview,
-            onSelect: updatePreview,
-            onRelease: resetCoords,
-            aspectRatio: 16 / 9,
-
-            crop(event) {},
-            function() {
-                jCropAPI = this
-                jCropAPI.removeAttr('style');
-            }
-        });
-    </script>
-    @endsection
     <script src="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.ui.widget.js') }}"></script>
