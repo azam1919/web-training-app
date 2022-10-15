@@ -95,143 +95,96 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Web Tutorials List</h3>
 
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <table id="example1" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Heading</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @php
-                                            $count = 0;
-                                            @endphp
-                                            @foreach ($web_trainings as $web_training)
-                                            <tr class="parent">
-                                                <td>
-                                                    {{ ++$count }}
-                                                </td>
-                                                <td>
-                                                    {{ $web_training->heading }}
-                                                </td>
-                                                <td>
-                                                    @if ($web_training->status == 1)
-                                                    <span class="badge badge-pill badge-success">
-                                                        Publish
-                                                    </span>
-                                                    @else
-                                                    <span class="badge badge-pill badge-danger">
-                                                        Draft
-                                                    </span>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Action
-                                                        </button>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="{{ route('tutorial.edit.show', ['id' => $web_training->id]) }}">Edit</a>
-                                                            {{-- <a class="dropdown-item"
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table id="example1" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Heading</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php
+                                                    $count = 0;
+                                                @endphp
+                                                @foreach ($web_trainings as $web_training)
+                                                    <tr class="parent">
+                                                        <td>
+                                                            {{ ++$count }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $web_training->heading }}
+                                                        </td>
+                                                        <td>
+                                                            @if ($web_training->status == 1)
+                                                                <span class="badge badge-pill badge-success">
+                                                                    Publish
+                                                                </span>
+                                                            @else
+                                                                <span class="badge badge-pill badge-danger">
+                                                                    Draft
+                                                                </span>
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button class="btn btn-secondary dropdown-toggle"
+                                                                    type="button" id="dropdownMenuButton"
+                                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false">
+                                                                    Action
+                                                                </button>
+                                                                <div class="dropdown-menu"
+                                                                    aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ route('tutorial.edit.show', ['id' => $web_training->id]) }}">Edit</a>
+                                                                    {{-- <a class="dropdown-item"
                                                                         href="{{ route('tutorial.edit.show', ['id' => $web_training->id]) }}">Edit
                                                             Tutorial</a> --}}
 
-                                                            <form action="{{ route('heading.delete') }}" method="POST" class="ms-2" id="actionUrl">
-                                                                @csrf
-                                                                <input type="hidden" name="id" class="id" value="{{ $web_training->id }}">
-                                                                <button type="submit" class="btn btn-danger delete_tutorial dropdown-item">
-                                                                    Delete
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                        <!-- <tfoot>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Heading</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </tfoot> -->
-                                    </table>
+                                                                    <form action="{{ route('heading.delete') }}"
+                                                                        method="POST" class="ms-2" id="actionUrl">
+                                                                        @csrf
+                                                                        <input type="hidden" name="id" class="id"
+                                                                            value="{{ $web_training->id }}">
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger delete_tutorial dropdown-item">
+                                                                            Delete
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Heading</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
                                 </div>
-                                <!-- /.card-body -->
+                                <!-- /.card -->
                             </div>
-                            <!-- /.card -->
+                            <!-- /.col -->
                         </div>
-                        <!-- /.col -->
+                        <!-- /.row -->
                     </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.container-fluid -->
-            </section>
-            <!-- /.content -->
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.content -->
+            </div>
         </div>
-    </div>
-    <!-- scripts -->
-    <!-- sweetalert -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="/dist/js/tutorial/sweetalert.js"></script>
-    <!-- sweetalert end  -->
-    <!-- footer datatable links -->
-    <!-- Bootstrap 4 -->
-    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="/plugins/jszip/jszip.min.js"></script>
-    <script src="/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
-    <!-- AdminLTE App -->
-    <script src="/dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <!-- <script src="{{asset('/dist/js/demo.js')}}"></script> -->
-    <!-- Page specific script -->
-    <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "autoWidth": false,
-                "searching": true,
-                'aLengthMenu': [
-                    [5, 10, 25, 50, -1],
-                    [5, 10, 25, 50, "All"]
-                ],
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-
-            }).buttons().container().appendTo(
-                '#example1_wrapper .col-md-6:eq(1)');
-            // $('#example2').DataTable({
-            //     "paging": true,
-            //     "lengthChange": false,
-            //     "searching": false,
-            //     "ordering": true,
-            //     "info": true,
-            //     "autoWidth": false,
-            //     "responsive": true,
-            // });
-        });
-    </script>
-    <!-- end  -->
-    <!-- scripts end -->
     @endsection
 </body>
 
