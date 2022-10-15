@@ -154,14 +154,14 @@
                                             </tr>
                                             @endforeach
                                         </tbody>
-                                        <tfoot>
+                                        <!-- <tfoot>
                                             <tr>
                                                 <th>#</th>
                                                 <th>Heading</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
-                                        </tfoot>
+                                        </tfoot> -->
                                     </table>
                                 </div>
                                 <!-- /.card-body -->
@@ -203,7 +203,7 @@
     <!-- AdminLTE App -->
     <script src="/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="/dist/js/demo.js"></script>
+    <script src="{{asset('/dist/js/demo.js')}}"></script>
     <!-- Page specific script -->
     <script>
         $(function() {
