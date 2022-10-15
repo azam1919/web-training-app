@@ -165,8 +165,6 @@
     <script src="{{ asset('dist/js/imageupload/jquery.fileupload.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.fancy-fileupload.js') }}"></script>
-    <script src="{{ asset('dist/js/pages/tutorial/summernote-lite.min.js') }}"></script>
-    <script src="{{ asset('dist/js/pages/tutorial/summer-note.js') }}"></script>
 
 </body>
 

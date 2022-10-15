@@ -25,7 +25,7 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- JQVMap -->
-    <link rel="stylesheet" href="{{ asset('plugins/jqvmap/jqvmap.min.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('plugins/jqvmap/jqvmap.min.css') }}"> -->
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
     <!-- overlayScrollbars -->
@@ -203,7 +203,7 @@
     <!-- AdminLTE App -->
     <script src="/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="{{asset('/dist/js/demo.js')}}"></script>
+    <!-- <script src="{{asset('/dist/js/demo.js')}}"></script> -->
     <!-- Page specific script -->
     <script>
         $(function() {
