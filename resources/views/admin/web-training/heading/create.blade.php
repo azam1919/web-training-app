@@ -39,8 +39,8 @@
                             </ol>
                         </div>
                     </div>
-                    <div class="row mb-2">
-                        <div class="col-12 form-group px-4 my-4">
+                    <div class="row mb-2 d-flex justify-content-center">
+                        <div class="col-6 col-xl-6 col-lg-8 col-md-8 col-sm-11 col-11 bg-white p-3 form-group px-4 my-4">
                             <form action="{{ route('heading.create.store') }}" method="post">
                                 @csrf
                                 @if (isset($errors) && count($errors) > 0)
@@ -54,21 +54,20 @@
                                 @endif
                                 <div class="form-group">
                                     <label for="">Heading</label>
-                                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="heading" placeholder="...">
+                                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="heading" placeholder="Tutorial Heading">
                                 </div>
                                 <div class="form-group my-3">
-                                    <label> Status </label>
+                                    <label> Tutorial Status </label>
                                     <select name="status" id="" class="form-control">
-                                        <option value="" hidden selected disabled>SELECT</option>
+                                        <option value="" hidden selected disabled>Select</option>
                                         <option value="0">Draft</option>
                                         <option value="1">Publish</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary" id="inputGroup-sizing-default">Save</button>
+                                    <button type="submit" class="btn btn-primary form-control" id="inputGroup-sizing-default">Save</button>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
