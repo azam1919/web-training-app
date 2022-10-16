@@ -255,98 +255,12 @@
                             </div>
                         </section>
                     </div>
-                    <!-- /.card -->
-                    <!-- right col -->
-                </div>
+                </section>
+            </div>
         </div>
-        </section>
-
-    </div>
-    </div>
-
-    <script>
-        CKEDITOR.replace('description');
-    </script>
-
-    <script type="module">
-        import {
-            Uppy,
-            Dashboard,
-            XHRUpload,
-            GoldenRetriever,
-            Tus
-        } from "https://releases.transloadit.com/uppy/v3.0.1/uppy.min.mjs"
-        var uppy = new Uppy()
-            .use(Dashboard, {
-                inline: true,
-                target: '#drag-drop-area',
-                recoveredAllFiles: 'We restored all files. You can now resume the upload.',
-                sessionRestored: 'Session restored',
-            })
-            .use(XHRUpload, {
-                endpoint: "{{ route('tutorial.create.store') }}",
-                headers: {
-                    'X-CSRF-Token': " {{ csrf_token() }} "
-                },
-                formData: true,
-                fieldName: 'fancy_upload[]',
-
-            })
-        .use(Tus, {
-                endpoint: 'https://tusd.tusdemo.net/files/', // use your tus endpoint here
-                retryDelays: [0, 1000, 3000, 5000],
-            })
-            .use(GoldenRetriever)
-        uppy.on('complete', (result) => {
-            console.log('Upload complete! We’ve uploaded these files:', result.successful);
-            $('#upload_images').load(document.URL + ' #upload_images');
-        });
-    </script>
-    <!-- JQUery draggable -->
-    <script>
-        $(document).ready(function() {
-            $('#imagelist li img').click(function() {
-                var imagepath = $(this).attr('src');
-                var _this = $(this).parents('li');
-                // alert(imagepath);    
-                $('.editimage img').attr('src', imagepath);
-                $('.editimage img').load(document.URL + '.editimage img');
-                var img_id = $('#img_id').val(_this.find('.upload_img_id').val());
-                // var db_description = _this.find('.upload_description').val();
-
-                // var description = $("#description").val(db_description); //CKeditor
-                // CKEDITOR.replace(description);
-
-                // var description = $('#description').val(_this.find('.upload_description').val());
-                $('#image_id').val($('#img_id').val());
-                console.log(img_id);
-                // console.log(description);
-            });
-            $('.uppy-c-btn-primary').click(function() {
-                alerrt('jasdgf');
-            });
-            $(function() {
-                $("#draggable").draggable();
-            });
-        });
-    </script>
-    <!-- JCrop -->
-    <script type="module">
-        import Cropper from 'cropperjs';
-        const image = document.getElementById('image');
-        const cropper = new Cropper(image, {
-            onChange: updatePreview,
-            onSelect: updatePreview,
-            onRelease: resetCoords,
-            aspectRatio: 16 / 9,
-
-            crop(event) {},
-            function() {
-                jCropAPI = this
-                jCropAPI.removeAttr('style');
-            }
-        });
-    </script>
+        <script>
+            
+        </script>
     @endsection
     <script src="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
