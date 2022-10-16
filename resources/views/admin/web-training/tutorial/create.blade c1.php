@@ -64,7 +64,7 @@
                         @endif
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0">Create {{ $heading['0']->heading }} Tutorials</h1>
+                                <h1 class="m-0">Create {{ $web_trainings['0']->heading }} Tutorials</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
@@ -177,7 +177,7 @@
         </div>
     @endsection
     @Include('layouts.links.admin.foot')
-    {{-- <!-- <script src="{{ asset('dist/js/imageupload/jquery-1.12.4.min.js') }}"></script> --> --}}
+    <!-- <script src="{{ asset('dist/js/imageupload/jquery-1.12.4.min.js') }}"></script> -->
     <script src="{{ asset('dist/js/imageupload/jquery.ui.widget.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.fileupload.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.iframe-transport.js') }}"></script>

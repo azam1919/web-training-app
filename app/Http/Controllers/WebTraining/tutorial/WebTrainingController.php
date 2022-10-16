@@ -27,10 +27,10 @@ class WebTrainingController extends Controller
 
             $web_trainings_asset = WebTrainingAsset::all();
             // dd($web_trainings_asset);
-            $heading = WebTraining::where('id', $web_tr_id)->select('heading')->get();
+            $web_trainings = WebTraining::where('id', $web_tr_id)->select('heading')->get();
             // dd($heading->toArray());
             $images = WebTrainingAsset::where('web_tr_id', $web_tr_id)->get();
-            return view('admin.web-training.tutorial.create', ['heading' => $heading, 'images' => $images, 'web_trainings_asset' => json_decode($web_trainings_asset, true)]);
+            return view('admin.web-training.tutorial.create', ['web_trainings' => $web_trainings, 'images' => $images, 'web_trainings_asset' => json_decode($web_trainings_asset, true)]);
         } else {
             return back();
         }
@@ -40,6 +40,8 @@ class WebTrainingController extends Controller
         // return $request;
 
         $fancy_upload = array();
+
+
         if ($request->hasfile('fancy_upload')) {
             foreach ($request->file('fancy_upload') as $file) {
                 $image_name = md5(rand(1000, 10000));
@@ -69,7 +71,8 @@ class WebTrainingController extends Controller
 
             $images = WebTrainingAsset::where('web_tr_id', $web_tr_id)->get();
             return back()->with('success', 'Your files has been successfully added');
-        } else {
+        }
+        if (!empty($request->description)) {
             $id = $request->id;
             $description = $request->description;
             $x = $request->x;
@@ -93,6 +96,8 @@ class WebTrainingController extends Controller
                 'height' => $height,
             ];
             return json_encode($data);
+        } else {
+            echo "Description Required";
         }
         // $web_trainings= new WebTrainingAsset();
         // return $web_trainings;
@@ -140,8 +145,13 @@ class WebTrainingController extends Controller
     public function edit(Request $request, $id)
     {
         if (FacadesRequest::isMethod('get')) {
-            // $heading = WebTraining::where('id', $request->id)->select('heading')->get();
-            $web_trainings = WebTraining::with('web_trainings_assets')->where('id', $request->id)->get();
+            $web_trainings_asset = WebTrainingAsset::all();
+            // dd($web_trainings_asset);
+            $web_trainings = WebTraining::where('id', $request->id)->get();
+            // dd($heading->toArray());
+            $images = WebTrainingAsset::where('web_tr_id', $request->id)->get();
+
+            return view('admin.web-training.tutorial.edit', ['web_trainings' => $web_trainings, 'images' => $images, 'web_trainings_asset' => json_decode($web_trainings_asset, true)]);
 
             return view('admin.web-training.tutorial.edit', ['web_trainings' => $web_trainings]);
         } else {
