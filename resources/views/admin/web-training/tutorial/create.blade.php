@@ -180,40 +180,40 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- /.card -->
-                                            <!-- Uploaded images -->
-                                            <div class="card" id="upload_images">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">
-                                                        <i class="fas fa-image mr-1"></i>
-                                                        Uploaded Images
-                                                    </h3>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="tab-content p-0">
-                                                        <div class="chart " id="revenue-chart"
-                                                            style="position: relative; height: 315px; overflow-y: scroll;">
-                                                            <ul style="list-style: none;" id="imagelist">
-                                                                @foreach ($images as $get)
-                                                                    <li class="my-3 row w-auto">
-                                                                        <img src="{{ URL::to($get->image) }}"
-                                                                            alt="image" width="50px" height="50px"
-                                                                            style="object-fit: contain;"
-                                                                            class="rounded" />
-                                                                        <input type="hidden" class="upload_img_id"
-                                                                            value="{{ $get->id }}">
-                                                                        <input type="hidden" class="upload_description"
-                                                                            value="{{ $get->description }}">
-                                                                        <span>{{ $get->image }} </span>
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.card -->
-                                                    <!-- right col -->
-                                                </div>
+                                        </div>
+                                        <!-- /.card -->
+                                        <!-- Uploaded images -->
+                                        <div class="card" id="upload_images">
+                                            <div class="card-header">
+                                                <h3 class="card-title">
+                                                    <i class="fas fa-image mr-1"></i>
+                                                    Uploaded Images
+                                                </h3>
                                             </div>
+                                            <div class="card-body">
+                                                <div class="tab-content p-0">
+                                                    <div class="chart " id="revenue-chart"
+                                                        style="position: relative; height: 315px; overflow-y: scroll;">
+                                                        <ul style="list-style: none;" id="imagelist">
+                                                            @foreach ($images as $get)
+                                                                <li class="my-3 row w-auto">
+                                                                    <img src="{{ URL::to($get->image) }}" alt="image"
+                                                                        width="50px" height="50px"
+                                                                        style="object-fit: contain;" class="rounded" />
+                                                                    <input type="hidden" class="upload_img_id"
+                                                                        value="{{ $get->id }}">
+                                                                    <input type="hidden" class="upload_description"
+                                                                        value="{{ $get->description }}">
+                                                                    <span>{{ $get->image }} </span>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <!-- /.card -->
+                                                <!-- right col -->
+                                            </div>
+                                        </div>
                                     </section>
                                     <!-- /.Left col -->
                                     <!-- right col (We are only adding the ID to make the widgets sortable)-->
@@ -269,6 +269,32 @@
 
         <script>
             CKEDITOR.replace('description');
+        </script>
+        <!-- JQUery draggable -->
+        <script>
+            $('#imagelist li img').click(function(e) {
+                var imagepath = $(this).attr('src');
+                var _this = $(this).parents('li');
+                // alert(imagepath);    
+                $('.editimage img').attr('src', imagepath);
+                $('.editimage img').load(document.URL + '.editimage img');
+                var img_id = $('#img_id').val(_this.find('.upload_img_id').val());
+                // var db_description = _this.find('.upload_description').val();
+
+                // var description = $("#description").val(db_description); //CKeditor
+                // CKEDITOR.replace(description);
+
+                // var description = $('#description').val(_this.find('.upload_description').val());
+                $('#image_id').val($('#img_id').val());
+                console.log(img_id);
+                // console.log(description);
+            });
+            $('.uppy-c-btn-primary').click(function() {
+                alerrt('jasdgf');
+            });
+            $(function() {
+                $("#draggable").draggable();
+            });
         </script>
 
         <script type="module">
@@ -343,32 +369,6 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     @Include('layouts.links.admin.foot')
     @Include('layouts.links.admin.tutorial.sweet_alert.foot')
-    <!-- JQUery draggable -->
-    <script>
-        $('#imagelist li img').click(function(e) {
-            var imagepath = $(this).attr('src');
-            var _this = $(this).parents('li');
-            // alert(imagepath);    
-            $('.editimage img').attr('src', imagepath);
-            $('.editimage img').load(document.URL + '.editimage img');
-            var img_id = $('#img_id').val(_this.find('.upload_img_id').val());
-            // var db_description = _this.find('.upload_description').val();
-
-            // var description = $("#description").val(db_description); //CKeditor
-            // CKEDITOR.replace(description);
-
-            // var description = $('#description').val(_this.find('.upload_description').val());
-            $('#image_id').val($('#img_id').val());
-            console.log(img_id);
-            // console.log(description);
-        });
-        $('.uppy-c-btn-primary').click(function() {
-            alerrt('jasdgf');
-        });
-        $(function() {
-            $("#draggable").draggable();
-        });
-    </script>
 
 
 </body>
