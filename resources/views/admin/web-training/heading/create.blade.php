@@ -54,7 +54,7 @@
                                 @endif
                                 <div class="form-group">
                                     <label for="">Heading</label>
-                                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="heading" placeholder="Tutorial Heading">
+                                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="heading" placeholder="Example">
                                 </div>
                                 <div class="form-group my-3">
                                     <label> Tutorial Status </label>
