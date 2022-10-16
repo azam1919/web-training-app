@@ -12,8 +12,6 @@
     @Include('layouts.links.admin.head')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote-lite.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote.min.css') }}">
     <style>
         /* width */
         ::-webkit-scrollbar {
@@ -159,7 +157,7 @@
                                                 Description
                                             </h3>
                                         </div>
-                                        <div class="card-body" id="summernote">
+                                        <div class="card-body">
                                             <div style="height: 250px; width: 100%;">
                                             </div>
                                         </div>
@@ -181,8 +179,6 @@
     <script src="{{ asset('dist/js/imageupload/jquery.fileupload.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.fancy-fileupload.js') }}"></script>
-    <script src="{{ asset('dist/js/pages/tutorial/summernote-lite.min.js') }}"></script>
-    <script src="{{ asset('dist/js/pages/tutorial/summer-note.js') }}"></script>
     <script>
         $(document).ready(function() {
             var token;

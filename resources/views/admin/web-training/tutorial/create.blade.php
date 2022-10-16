@@ -12,6 +12,8 @@
     {{-- @Include('layouts.favicon') --}}
     <link href="https://releases.transloadit.com/uppy/v3.0.1/uppy.min.css" rel="stylesheet">
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <!-- Uppy CDN -->
+    <link href="https://releases.transloadit.com/uppy/v3.1.1/uppy.min.css" rel="stylesheet">
     <!-- Jquery Draggable Css -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <!-- Jquery Draggable Css end  -->
@@ -20,8 +22,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     @Include('layouts.links.admin.head')
-    <!-- @Include('layouts.links.admin.tutorial.sweet_alert.sweetalert')
-    @Include('layouts.links.admin.tutorial.sweet_alert.head') -->
+    @Include('layouts.links.admin.tutorial.sweet_alert.sweetalert')
+    @Include('layouts.links.admin.tutorial.sweet_alert.head')
     <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote-lite.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote.min.css') }}">
 
@@ -86,225 +88,13 @@
     @extends('layouts.admin.master')
     @section('content')
         <div class="wrapper">
-            <!-- Content Wrapper. Contains page content -->
-            @if (!empty($web_trainings))
+            <section>
                 @foreach ($web_trainings as $web_training)
-                    <section>
-                        <div class="content-wrapper">
-                            <!-- Content Header (Page header) -->
-                            <div class="content-header">
-                                <div class="container-fluid">
-
-                                    @if (session('success'))
-                                        <div id="success" class="alert alert-default-success alert-dismissible fade show"
-                                            role="alert">
-                                            <strong>{{ session('success') }}</strong>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    @endif
-                                    <div id="error" class="alert alert-default-danger alert-dismissible fade show"
-                                        role="alert" style="display: none">
-                                        <strong></strong>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div id="success_info" class="alert alert-default-success alert-dismissible fade show"
-                                        role="alert" style="display: none">
-                                        <strong></strong>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="row mb-2">
-                                        <div class="col-sm-6">
-                                            <h1 class="m-0">Create {{ $heading['0']->heading ?? ' ' }} Tutorials</h1>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <ol class="breadcrumb float-sm-right">
-                                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                                <li class="breadcrumb-item active">Create Tutorials</li>
-                                            </ol>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <form action="{{ route('heading.edit.update') }}" class="input-group"
-                                                method="post" id="actionUrl">
-                                                @csrf
-                                                <input type="hidden" name="id" id="id"
-                                                    value="{{ $web_training->id }}">
-                                                <div class="input-group-append">
-                                                    <select name="status" id="status" class="form-control">
-                                                        <option value="@if ($web_training->status == 0) 0 @else 1 @endif"
-                                                            hidden selected>
-                                                            @if ($web_training->status == 0)
-                                                                Draft
-                                                            @else
-                                                                Publish
-                                                            @endif
-                                                        </option>
-                                                        <option value="0">Draft</option>
-                                                        <option value="1">Publish</option>
-                                                    </select>
-                                                </div>
-                                                <input type="text" class="form-control" id="heading"
-                                                    value="{{ $web_training->heading }}" placeholder="..."
-                                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
-
-                                                <div class="input-group-append ml-3">
-                                                    <button type="submit" class="btn btn-secondary update_heading"
-                                                        style="background-color: #091e3e">Update</button>
-                                                </div>
-                                                <span id="heading_error" class="invalid-feedback"></span>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.content-header -->
-                            <!-- Main content -->
-                            <link rel="stylesheet" href="{{ asset('dist/css/imageupload/fancy_fileupload.css') }}">
-                            <section class="content">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <section class="col-lg-5 connectedSortable">
-                                            <!-- Custom tabs with image drag and drop -->
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">
-                                                        <i class="fas fa-image mr-1"></i>
-                                                        Images
-                                                    </h3>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="p-0">
-                                                        <div class="container-fluid">
-                                                            <div class="row">
-                                                                <div class="col-lg-12"
-                                                                    style="height: 350px; overflow: hidden; ">
-                                                                    <form method="post"
-                                                                        action="{{ url('tutorial/create/store') }}">
-                                                                        <div id="drag-drop-area" name="fancy_upload[]">
-                                                                        </div>
-                                                                    </form>
-                                                                    <!-- <div class="fallback">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <form action="" id="formdata">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <input id="fancy_upload" type="file" name="fancy_upload"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            accept=".jpg, .png, image/jpeg, image/png" multiple>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </form>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div> -->
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- /.card -->
-                                            <!-- Uploaded images -->
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">
-                                                        <i class="fas fa-image mr-1"></i>
-                                                        Uploaded Images
-                                                    </h3>
-                                                </div>
-                                                <div class="card-body" id="upload_images">
-                                                    <div class="tab-content p-0">
-                                                        <div class="chart " id="revenue-chart"
-                                                            style="position: relative; height: 315px; overflow-y: scroll;">
-                                                            <ul style="list-style: none;" id="imagelist">
-                                                                @foreach ($images as $get)
-                                                                    <li class="my-3 row w-auto">
-                                                                        <img src="{{ URL::to($get->image) }}"
-                                                                            alt="image" width="50px" height="50px"
-                                                                            style="object-fit: contain;"
-                                                                            class="rounded" />
-                                                                        <input type="hidden" class="upload_img_id"
-                                                                            value="{{ $get->id }}">
-                                                                        <input type="hidden"
-                                                                            class="upload_img_description"
-                                                                            value="{{ $get->description }}">
-                                                                        <input type="hidden" class="upload_img_latitude"
-                                                                            value="{{ $get->latitude }}">
-                                                                        <input type="hidden" class="upload_img_longitude"
-                                                                            value="{{ $get->longitude }}">
-                                                                        <input type="hidden" class="upload_img_height"
-                                                                            value="{{ $get->height }}">
-                                                                        <input type="hidden" class="upload_img_width"
-                                                                            value="{{ $get->width }}">
-                                                                        <input type="hidden" class="upload_description"
-                                                                            value="{{ $get->description }}">
-                                                                        <span>{{ $get->image }} </span>
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                        <!-- /.Left col -->
-                                        <!-- right col (We are only adding the ID to make the widgets sortable)-->
-
-                                        <section class="col-lg-7 connectedSortable" id="draggable">
-
-                                            <!-- Edit Image Section -->
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">
-                                                        <i class="fas fa-edit mr-1"></i>
-                                                        Edit Images
-                                                    </h3>
-                                                </div>
-                                                <div class="card-body" id="card-body">
-                                                    @include('layouts.links.admin.tutorial.jcrop')
-                                                    <div class="editimage">
-                                                        <img src="{{ asset('dist/img/edit profile.jpg') }}"
-                                                            alt="image" class="img-fluid" id="image">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- /.card -->
-                                            <!-- Description card -->
-                                            <div class="card">
-                                                <form action="" method="post" id="actionUrl">
-                                                    @csrf
-                                                    <div class="card-header">
-                                                        <div style="display: flex; justify-content:space-between;">
-                                                            <h3 class="card-title">
-                                                                <i class="fas fa-edit mr-1"></i>
-                                                                Description
-                                                            </h3>
-                                                            <input type="hidden" id="image_id">
-
-                                                            <button
-                                                                class="btn btn-primary btn-sm ml-auto update_crop swalDefaultSuccess"
-                                                                type="submit">Save</button>
-                                                        </div>
-                                                    </div>
-
-                                                    <input type="text" name="description" id="description"
-                                                        value="" />
-                                                </form>
-                                            </div>
-                                        </section>
-                                    </div>
-                                    <!-- /.card -->
-                                    <!-- right col -->
-                                </div>
-                        </div>
-                    </section>
-                @endforeach
-            @else
-                <section>
+                    <!-- Content Wrapper. Contains page content -->
                     <div class="content-wrapper">
                         <!-- Content Header (Page header) -->
                         <div class="content-header">
                             <div class="container-fluid">
-
                                 @if (session('success'))
                                     <div id="success" class="alert alert-default-success alert-dismissible fade show"
                                         role="alert">
@@ -314,20 +104,6 @@
                                         </button>
                                     </div>
                                 @endif
-                                <div id="error" class="alert alert-default-danger alert-dismissible fade show"
-                                    role="alert" style="display: none">
-                                    <strong></strong>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div id="success_info" class="alert alert-default-success alert-dismissible fade show"
-                                    role="alert" style="display: none">
-                                    <strong></strong>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
                                 <div class="row mb-2">
                                     <div class="col-sm-6">
                                         <h1 class="m-0">Create {{ $heading['0']->heading ?? ' ' }} Tutorials</h1>
@@ -341,8 +117,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <form action="{{ route('heading.edit.update') }}" class="input-group"
-                                            method="post" id="actionUrl">
+                                        <form action="{{ route('heading.edit.update') }}" class="input-group" method="post"
+                                            id="actionUrl">
                                             @csrf
                                             <input type="hidden" name="id" id="id"
                                                 value="{{ $web_training->id }}">
@@ -399,59 +175,45 @@
                                                                     action="{{ url('tutorial/create/store') }}">
                                                                     <div id="drag-drop-area" name="fancy_upload[]"></div>
                                                                 </form>
-                                                                <!-- <div class="fallback">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <form action="" id="formdata">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <input id="fancy_upload" type="file" name="fancy_upload"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            accept=".jpg, .png, image/jpeg, image/png" multiple>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </form>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div> -->
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- /.card -->
-                                        <!-- Uploaded images -->
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h3 class="card-title">
-                                                    <i class="fas fa-image mr-1"></i>
-                                                    Uploaded Images
-                                                </h3>
-                                            </div>
-                                            <div class="card-body" id="upload_images">
-                                                <div class="tab-content p-0">
-                                                    <div class="chart " id="revenue-chart"
-                                                        style="position: relative; height: 315px; overflow-y: scroll;">
-                                                        <ul style="list-style: none;" id="imagelist">
-                                                            @foreach ($images as $get)
-                                                                <li class="my-3 row w-auto">
-                                                                    <img src="{{ URL::to($get->image) }}" alt="image"
-                                                                        width="50px" height="50px"
-                                                                        style="object-fit: contain;" class="rounded" />
-                                                                    <input type="hidden" class="upload_img_id"
-                                                                        value="{{ $get->id }}">
-                                                                    <input type="hidden" class="upload_img_description"
-                                                                        value="{{ $get->description }}">
-                                                                    <input type="hidden" class="upload_img_latitude"
-                                                                        value="{{ $get->latitude }}">
-                                                                    <input type="hidden" class="upload_img_longitude"
-                                                                        value="{{ $get->longitude }}">
-                                                                    <input type="hidden" class="upload_img_height"
-                                                                        value="{{ $get->height }}">
-                                                                    <input type="hidden" class="upload_img_width"
-                                                                        value="{{ $get->width }}">
-                                                                    <input type="hidden" class="upload_description"
-                                                                        value="{{ $get->description }}">
-                                                                    <span>{{ $get->image }} </span>
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
+                                            <!-- /.card -->
+                                            <!-- Uploaded images -->
+                                            <div class="card" id="upload_images">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">
+                                                        <i class="fas fa-image mr-1"></i>
+                                                        Uploaded Images
+                                                    </h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="tab-content p-0">
+                                                        <div class="chart " id="revenue-chart"
+                                                            style="position: relative; height: 315px; overflow-y: scroll;">
+                                                            <ul style="list-style: none;" id="imagelist">
+                                                                @foreach ($images as $get)
+                                                                    <li class="my-3 row w-auto">
+                                                                        <img src="{{ URL::to($get->image) }}"
+                                                                            alt="image" width="50px" height="50px"
+                                                                            style="object-fit: contain;"
+                                                                            class="rounded" />
+                                                                        <input type="hidden" class="upload_img_id"
+                                                                            value="{{ $get->id }}">
+                                                                        <input type="hidden" class="upload_description"
+                                                                            value="{{ $get->description }}">
+                                                                        <span>{{ $get->image }} </span>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
                                                     </div>
+                                                    <!-- /.card -->
+                                                    <!-- right col -->
                                                 </div>
                                             </div>
-                                        </div>
                                     </section>
                                     <!-- /.Left col -->
                                     <!-- right col (We are only adding the ID to make the widgets sortable)-->
@@ -471,6 +233,7 @@
                                                 <div class="editimage">
                                                     <img src="{{ asset('dist/img/edit profile.jpg') }}" alt="image"
                                                         class="img-fluid" id="image">
+                                                    <input type="hidden" name="img_id" id="img_id">
                                                 </div>
                                             </div>
                                         </div>
@@ -486,13 +249,10 @@
                                                             Description
                                                         </h3>
                                                         <input type="hidden" id="image_id">
-
-                                                        <button
-                                                            class="btn btn-primary btn-sm ml-auto update_crop swalDefaultSuccess"
+                                                        <button class="btn btn-primary btn-sm ml-auto update_crop"
                                                             type="submit">Save</button>
                                                     </div>
                                                 </div>
-
                                                 <input type="text" name="description" id="description"
                                                     value="" />
                                             </form>
@@ -503,45 +263,12 @@
                                 <!-- right col -->
                             </div>
                     </div>
-                </section>
-            @endif
+                @endforeach
+            </section>
         </div>
-        </div>
+
         <script>
             CKEDITOR.replace('description');
-        </script>
-        <!-- JQUery draggable -->
-        <script>
-            $(document).ready(function() {
-                $('#imagelist li img').click(function() {
-                    var imagepath = $(this).attr('src');
-                    var _this = $(this).parents('li');
-                    console.log(1);
-                    // alert(imagepath);    
-                    // $("#card-body").empty();
-                    // $('.editimage img').empty();
-                    // $('.editimage img').destroy();
-                    // $(".editimage img").removeAttr("style");
-                    $('.editimage img').attr('src', imagepath);
-                    $('.editimage img').load(location.URL + '.editimage img');
-                    $('#image_id').val(_this.find('.upload_img_id').val());
-                    // var db_description = _this.find('.upload_description').val();
-
-                    // var description = $("#description").val(db_description); //CKeditor
-                    // CKEDITOR.replace(description);
-
-                    // var description = $('#description').val(_this.find('.upload_description').val());
-                    // $('#image_id').val($('#img_id').val());
-                    // console.log(img_id);
-                    // console.log(description);
-                });
-                $('.uppy-c-btn-primary').click(function() {
-                    alerrt('jasdgf');
-                });
-                $(function() {
-                    $("#draggable").draggable();
-                });
-            });
         </script>
 
         <script type="module">
@@ -549,6 +276,7 @@
             Uppy,
             Dashboard,
             XHRUpload,
+            GoldenRetriever,
             Tus
         } from "https://releases.transloadit.com/uppy/v3.0.1/uppy.min.mjs"
         var uppy = new Uppy()
@@ -567,21 +295,21 @@
                 fieldName: 'fancy_upload[]',
 
             })
-
+        .use(Tus, {
+                endpoint: 'https://tusd.tusdemo.net/files/', // use your tus endpoint here
+                retryDelays: [0, 1000, 3000, 5000],
+            })
+            .use(GoldenRetriever)
         uppy.on('complete', (result) => {
             console.log('Upload complete! We’ve uploaded these files:', result.successful);
-            // location.reload();
+            $('#upload_images #imagelist').empty().load(document.URL + '#upload_images #imagelist li');            
         });
-        // $("#upload_images").load(location.href + " #upload_images");
-        // uppy.on('file-added', (file) => {
-        // alert('Added file', file)
-        // })
     </script>
+
         <!-- JCrop -->
         <script type="module">
         import Cropper from 'cropperjs';
         const image = document.getElementById('image');
-        // image.reset();
         const cropper = new Cropper(image, {
             onChange: updatePreview,
             onSelect: updatePreview,
@@ -591,6 +319,7 @@
             crop(event) {},
             function() {
                 jCropAPI = this
+                jCropAPI.removeAttr('style');
             }
         });
     </script>
@@ -604,6 +333,8 @@
     <script src="{{ asset('dist/js/pages/tutorial/summernote-lite.min.js') }}"></script>
     <script src="{{ asset('dist/js/pages/tutorial/summer-note.js') }}"></script>
     <script src="/dist/js/tutorial/jcrop.js"></script>
+    <!-- Uppy CDN -->
+    <script src="https://releases.transloadit.com/uppy/v3.1.1/uppy.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"
         integrity="sha512-ooSWpxJsiXe6t4+PPjCgYmVfr1NS5QXJACcR/FPpsdm6kqG1FmQ2SVyg2RXeVuCRBLr0lWHnWJP6Zs1Efvxzww=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -612,6 +343,33 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     @Include('layouts.links.admin.foot')
     @Include('layouts.links.admin.tutorial.sweet_alert.foot')
+    <!-- JQUery draggable -->
+    <script>
+        $('#imagelist li').click(function() {
+            console.log("signed Up");
+            var imagepath = $(this).attr('src');
+            var _this = $(this).parents('li');
+            // alert(imagepath);    
+            $('.editimage img').attr('src', imagepath);
+            $('.editimage img').load(document.URL + '.editimage img');
+            var img_id = $('#img_id').val(_this.find('.upload_img_id').val());
+            // var db_description = _this.find('.upload_description').val();
+
+            // var description = $("#description").val(db_description); //CKeditor
+            // CKEDITOR.replace(description);
+
+            // var description = $('#description').val(_this.find('.upload_description').val());
+            $('#image_id').val($('#img_id').val());
+            console.log(img_id);
+            // console.log(description);
+        });
+        $('.uppy-c-btn-primary').click(function() {
+            alerrt('jasdgf');
+        });
+        $(function() {
+            $("#draggable").draggable();
+        });
+    </script>
 
 
 </body>

@@ -13,8 +13,6 @@
     @Include('layouts.links.admin.tutorial.sweet_alert.sweetalert')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote-lite.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote.min.css') }}">
     <style>
         /* width */
         ::-webkit-scrollbar {
@@ -227,6 +225,7 @@
                                                 <img src="{{ asset('dist/img/edit profile.jpg') }}" alt="image"
                                                     class="img-fluid" id="image">
                                             </div>
+<<<<<<< HEAD
                                         </div>
                                     </div>
                                     <!-- /.card -->
@@ -245,6 +244,10 @@
                                                     <button
                                                         class="btn btn-primary btn-sm ml-auto update_crop swalDefaultSuccess"
                                                         type="submit">Save</button>
+=======
+                                            <div class="card-body">
+                                                <div style="height: 250px; width: 100%;">
+>>>>>>> 0a9472873cf028a5d5ded24ec196f2e0af9b566e
                                                 </div>
                                             </div>
 
@@ -351,6 +354,7 @@
     <script src="{{ asset('dist/js/imageupload/jquery.fileupload.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.fancy-fileupload.js') }}"></script>
+<<<<<<< HEAD
     <script src="{{ asset('dist/js/pages/tutorial/summernote-lite.min.js') }}"></script>
     <script src="{{ asset('dist/js/pages/tutorial/summer-note.js') }}"></script>
     <script src="/dist/js/tutorial/jcrop.js"></script>
@@ -362,6 +366,66 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     @Include('layouts.links.admin.foot')
     @Include('layouts.links.admin.tutorial.sweet_alert.foot')
+=======
+    <script>
+        $(document).ready(function() {
+            var token;
+            // var file = $('#fancy_upload').val();
+
+            $('#fancy_upload').FancyFileUpload({
+
+                // send data to this url
+                'url': "{{ route('tutorial.edit.update') }}",
+
+                // key-value pairs to send to the server
+                'params': {
+                    _token: $('#formdata').find('input[name="_token"]').first().val(),
+                },
+
+                // editable file name?
+                'edit': false,
+
+                // max file size
+                'maxfilesize': 1000000,
+                'retries': 0,
+                'showpreview': function(e, data, preview, previewclone) {
+                    // do something
+                },
+                'hidepreview': function(e, data, preview, previewclone) {
+                    // do something
+                },
+                'preinit': null,
+                'postinit': null,
+                'added': function(e, data) {
+                    // do something
+                },
+                'startupload': function(SubmitUpload, e, data) {
+                    // do something
+                },
+                'continueupload': function(e, data) {
+                    // do something
+                },
+                'uploadcancelled': function(e, data) {
+                    // do something
+                },
+
+                // called whenever an upload has successfully completed
+                'uploadcompleted': function(e, data) {
+                    // do something
+
+                },
+
+
+
+                // jQuery File Upload options
+
+                'fileupload': {},
+
+
+
+
+
+>>>>>>> 0a9472873cf028a5d5ded24ec196f2e0af9b566e
 
 
 </body>
