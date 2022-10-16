@@ -54,12 +54,12 @@
                                 @endif
                                 <div class="form-group">
                                     <label for="">Heading</label>
-                                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="heading" placeholder="...">
+                                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="heading" placeholder="Example">
                                 </div>
                                 <div class="form-group my-3">
-                                    <label> Status </label>
+                                    <label> Tutorial Status </label>
                                     <select name="status" id="" class="form-control">
-                                        <option value="" hidden selected disabled>SELECT</option>
+                                        <option value="" hidden selected disabled>Select</option>
                                         <option value="0">Draft</option>
                                         <option value="1">Publish</option>
                                     </select>
