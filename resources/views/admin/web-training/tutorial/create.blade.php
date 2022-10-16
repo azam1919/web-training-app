@@ -345,8 +345,7 @@
     @Include('layouts.links.admin.tutorial.sweet_alert.foot')
     <!-- JQUery draggable -->
     <script>
-        $('#imagelist li').click(function() {
-            console.log("signed Up");
+        $('#imagelist li img').click(function(e) {
             var imagepath = $(this).attr('src');
             var _this = $(this).parents('li');
             // alert(imagepath);    
