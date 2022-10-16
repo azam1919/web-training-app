@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <div class="col-12 form-group px-4 my-4">
+                        <div class="col-12  bg-white form-group px-4 my-4">
                             <form action="{{ route('heading.create.store') }}" method="post">
                                 @csrf
                                 @if (isset($errors) && count($errors) > 0)
