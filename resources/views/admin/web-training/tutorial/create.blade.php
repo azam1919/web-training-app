@@ -14,6 +14,8 @@
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <!-- Uppy CDN -->
     <link href="https://releases.transloadit.com/uppy/v3.1.1/uppy.min.css" rel="stylesheet">
+    <!-- IntroJs CDN  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/introjs.min.css" integrity="sha512-DcHJLWkmfnv+isBrT8M3PhKEhsHWhEgulhr8m5EuGhdAG9w+vUyjlwgR4ISLN0+s/m4ItmPsTOqPzW714dtr5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Jquery Draggable Css -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <!-- Jquery Draggable Css end  -->
@@ -308,7 +310,7 @@
             $('#upload_images').load(document.URL + ' #upload_images');
         });
     </script>
-    <!-- JQUery draggable -->
+    <!-- JQUery draggable --> 
     
     <!-- JCrop -->
     <script type="module">
@@ -362,6 +364,8 @@
     <script src="{{ asset('dist/js/imageupload/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.fancy-fileupload.js') }}"></script>
     <script src="/dist/js/tutorial/jcrop.js"></script>
+    <!-- IntroJs JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/introjs.min.js" integrity="sha512-DcHJLWkmfnv+isBrT8M3PhKEhsHWhEgulhr8m5EuGhdAG9w+vUyjlwgR4ISLN0+s/m4ItmPsTOqPzW714dtr5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Uppy CDN -->
     <script src="https://releases.transloadit.com/uppy/v3.1.1/uppy.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js" integrity="sha512-ooSWpxJsiXe6t4+PPjCgYmVfr1NS5QXJACcR/FPpsdm6kqG1FmQ2SVyg2RXeVuCRBLr0lWHnWJP6Zs1Efvxzww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

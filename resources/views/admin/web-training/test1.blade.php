@@ -1,115 +1,101 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-    <title>5x5 Advanced Drag'n'drop File Uploader Example</title>
-    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/flatly/bootstrap.min.css">
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
-    </script>
-
-    <script src="dist/js/imageupload/5x5jqpi.min.js"></script>
-
-    <script>
-        $(function() {
-
-
-            $("#uploader").initUploader({
-                selectOpts: {
-                    one: 'jquery',
-                    two: 'script',
-                    three: 'net'
-                },
-                showDescription: true,
-            });
-        });
-    </script>
-<<<<<<< HEAD
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/introjs.min.css" integrity="sha512-DcHJLWkmfnv+isBrT8M3PhKEhsHWhEgulhr8m5EuGhdAG9w+vUyjlwgR4ISLN0+s/m4ItmPsTOqPzW714dtr5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Intro Js Image Page</title>
     <style>
-        body {
-            background: #fafafa;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        #warn {
-            background: linear-gradient(45deg, rgba(255, 255, 255, .8) 0, rgba(255, 255, 255, .8) 32%, rgba(255, 0, 0, .5) 33%, rgba(255, 0, 0, .5) 66%, rgba(255, 255, 255, .8) 67%, rgba(255, 255, 255, .8) 100%);
-            position: fixed;
-            bottom: 0;
+        .imgparent {
+            height: 100vh;
+            width: 100vw;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .imgparent img {
+            height: 100%;
             width: 100%;
-            height: 29px;
-            background-repeat: repeat;
-            background-size: 137px 56px;
-            text-align: center;
-            font-weight: 900;
-            border: thin solid #929292;
-            text-shadow: 0 0 8px #fff;
+            object-fit: contain;
+        }
+        #img_id{
+            padding-top:100px;
+            /* padding-bottom: 20px; */
+            background-color: red;
+        }
+        #img_id{
+            display:flex;
+            justify-content:center;
+        }
+        div{
+            background-color: red;
         }
     </style>
-
-
 </head>
 
 <body>
-    <div class="container my-5">
-        {{-- <div id="carbon-block" style="margin:30px auto" align="center"></div> --}}
-        <div id="uploader"></div>
-    </div>
-=======
-      <script>
-      var uppy = Uppy.Core()
-        .use(Uppy.Dashboard, {
-          inline: true,
-          target: '#drag-drop-area'
-        })
-        .use(Uppy.Tus, {endpoint: 'https://master.tus.io/files/'}) //you can put upload URL here, where you want to upload images
+    <!-- <div class="imgparent"> -->
+    <!-- <h1>skaldjfsdf</h1> -->
+    <!--  -->
+    <!-- asset('img/about.jpg') -->
+    <!--  -->
+    <!-- <img src="" alt="image"> -->
+    <!-- <img src="{{ asset('dist/img/edit profile.jpg') }}" alt="image" style="position:relative;" class="img-fluid" id="image"> -->
+    
+    <!-- </div> -->
 
-      uppy.on('complete', (result) => {
-        console.log('Upload complete! We’ve uploaded these files:', result.successful)
-      })
-    </script>
+<div style="height:<?php echo $wTassets[0]->height ?>px;width:<?php echo $wTassets[0]->width ?>px;background:color:red;position:absolute;top:<?php echo $wTassets[0]->longitude ?>px;left:<?php echo $wTassets[0]->latitude ?>px">
+</div>
+    <br/>
+    <!-- For testing JCROP coordinates -->
+    <!-- <div style="height:64px;width:202px;background-color:red;position:absolute;top:10px;left:44px;"> -->
+        
+    <!-- </div> -->
 
-    <!-- <script>
-        $(document).ready(function() {
-            if (window.File && window.FileList && window.FileReader) {
-                $("#files").on("change", function(e) {
-                    var files = e.target.files,
-                        filesLength = files.length;
-                    for (var i = 0; i < filesLength; i++) {
-                        var f = files[i]
-                        var fileReader = new FileReader();
-                        fileReader.onload = (function(e) {
-                            var file = e.target;
-                            $("<span class=\"pip\">" +
-                                "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-                                "<br/><span class=\"remove\">Remove image</span>" +
-                                "</span>").insertAfter("#files");
-                            $(".remove").click(function() {
-                                $(this).parent(".pip").remove();
-                            });
-
-                            // Old code here
-                            /*$("<img></img>", {
-                              class: "imageThumb",
-                              src: e.target.result,
-                              title: file.name + " | Click to remove"
-                            }).insertAfter("#files").click(function(){$(this).remove();});*/
-
-                        });
-                        fileReader.readAsDataURL(f);
-                    }
-                });
-            } else {
-                alert("Your browser doesn't support to File API")
-            }
-        });
-    </script> -->
->>>>>>> c89f3d0df1a6576c0f81ac7397c8733d2eae8bdf
+    <!-- <div class="container">
+        <div class="row">
+            <div class="card" data-intro="Hello World" data-title="this is testing" style="width:400px">
+                <img class="card-img-top" src="img_avatar1.png" data-intro="Hello World" data-title="this is testing" alt="Card image" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title" data-intro="Hello World" data-title="this is testing">John Doe</h4>
+                    <p class="card-text" data-intro="Hello World" data-title="this is testing">Some example text some example text. John Doe is an architect and engineer</p>
+                    <a href="#" class="btn btn-primary">See Profile</a>
+                </div>
+            </div>
+        </div>
+    </div> -->
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js" integrity="sha512-VTd65gL0pCLNPv5Bsf5LNfKbL8/odPq0bLQ4u226UNmT7SzE4xk+5ckLNMuksNTux/pDLMtxYuf0Copz8zMsSA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- <script>
+    introJs().setOptions({
+        showProgress: true,
+  steps: [{
+    element:document.querySelector('.card'),
+    title: 'Welcome',
+    intro: 'Hello World! 👋'
+  },
+  {
+    element: document.querySelector('.card-img-top'),
+    title:'This is image',
+    intro:'Hi Image'
+  },
+  {
+    element: document.querySelector('.card-body'),
+    intro: 'This step focuses on an element',
+    title:'This is overall body of the card',
+  }]
+}).start();
+</script> -->
 
 </html>

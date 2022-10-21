@@ -47,7 +47,7 @@ class WebTrainingController extends Controller
                 $image_full_name = $image_name . '.' . $exl;
                 $upload_path = 'dist/img/tutorial/';
                 $image_url = $upload_path . $image_full_name;
-                $response = $file->move($upload_path, $image_full_name);
+                $file->move($upload_path, $image_full_name);
                 //    return $response;
                 //    $name = time().'.'.$file->extension();
                 //    $file->move(public_path().'/dist/img/tutorial', $name);  
@@ -59,15 +59,16 @@ class WebTrainingController extends Controller
 
             WebTrainingAsset::insert([
                 'image' => implode('|', $fancy_upload),
-                'web_tr_id' => $web_tr_id,
-                'latitude' => null,
-                'longitude' => null,
-                'height' => null
+                'web_tr_id' => 20,
+                'latitude' => $request->y,
+                'longitude' => $request->x,
+                'height' => $request->height,
+                'width' => $request->width
 
             ]);
             $web_tr_id = Session::get('web_tr_id');
 
-            $images = WebTrainingAsset::where('web_tr_id', $web_tr_id)->get();
+            // $images = WebTrainingAsset::where('web_tr_id', $web_tr_id)->get();
             return back()->with('success', 'Your files has been successfully added');
         } else {
             $id = $request->id;
@@ -132,8 +133,13 @@ class WebTrainingController extends Controller
     public function storing(Request $request)
     {
         if (FacadesRequest::isMethod('get')) {
-            return view('admin.web-training.test');
+            // $wTassets = WebTrainingAsset::where('web_tr_id',18)->limit(1)->get();
+            $wTassets = WebTrainingAsset::where('id', 123)->get();
+            // return $wTassets;
+            return view('admin.web-training.test1',compact('wTassets'));
+            // return view('admin.web-training.test');
         } elseif (FacadesRequest::isMethod('post')) {
+
         } else {
         }
     }
