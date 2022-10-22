@@ -22,6 +22,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
 
         .imgparent img {
@@ -29,38 +30,25 @@
             width: 100%;
             object-fit: contain;
         }
-        #img_id{
-            padding-top:100px;
-            /* padding-bottom: 20px; */
+
+        .divImage {
             background-color: red;
-        }
-        #img_id{
-            display:flex;
-            justify-content:center;
-        }
-        div{
-            background-color: red;
+            z-index: 1;
         }
     </style>
 </head>
 
 <body>
-    <!-- <div class="imgparent"> -->
-    <!-- <h1>skaldjfsdf</h1> -->
-    <!--  -->
-    <!-- asset('img/about.jpg') -->
-    <!--  -->
-    <!-- <img src="" alt="image"> -->
-    <!-- <img src="{{ asset('dist/img/edit profile.jpg') }}" alt="image" style="position:relative;" class="img-fluid" id="image"> -->
-    
-    <!-- </div> -->
+    <div class="divImage" height="<?php echo $wTassets[0]->height ?>px" width="<?php echo $wTassets[0]->width ?>px" style="top:<?php echo $wTassets[0]->longitude ?>px;position:absolute;left:<?php echo $wTassets[0]->latitude ?>px;">
+    </div>
+    <div class="imgparent">
+        <img src="{{ asset('dist/img/edit profile.jpg') }}" alt="image" />
+    </div>
 
-<div style="height:<?php echo $wTassets[0]->height ?>px;width:<?php echo $wTassets[0]->width ?>px;background:color:red;position:absolute;top:<?php echo $wTassets[0]->longitude ?>px;left:<?php echo $wTassets[0]->latitude ?>px">
-</div>
-    <br/>
+    <!-- <img src="{{URL::to($wTassets[0]->image)}}" class="dyImage" alt="image" /> -->
     <!-- For testing JCROP coordinates -->
     <!-- <div style="height:64px;width:202px;background-color:red;position:absolute;top:10px;left:44px;"> -->
-        
+
     <!-- </div> -->
 
     <!-- <div class="container">

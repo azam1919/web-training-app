@@ -134,9 +134,10 @@ class WebTrainingController extends Controller
     {
         if (FacadesRequest::isMethod('get')) {
             // $wTassets = WebTrainingAsset::where('web_tr_id',18)->limit(1)->get();
+            $assets = WebTrainingAsset::all();
             $wTassets = WebTrainingAsset::where('id', 123)->get();
             // return $wTassets;
-            return view('admin.web-training.test1',compact('wTassets'));
+            return view('admin.web-training.test1',compact('wTassets','assets'));
             // return view('admin.web-training.test');
         } elseif (FacadesRequest::isMethod('post')) {
 
