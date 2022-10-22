@@ -1,8 +1,5 @@
-    <!-- Main row -->
-    <div class="row">
-        <!-- Left col -->
+    <!-- <div class="row">
         <section class="col-lg-7 connectedSortable">
-            <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
@@ -19,10 +16,9 @@
                             </li>
                         </ul>
                     </div>
-                </div><!-- /.card-header -->
+                </div>
                 <div class="card-body">
                     <div class="tab-content p-0">
-                        <!-- Morris chart - Sales -->
                         <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
                             <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
                         </div>
@@ -30,11 +26,9 @@
                             <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
                         </div>
                     </div>
-                </div><!-- /.card-body -->
+                </div>
             </div>
-            <!-- /.card -->
 
-            <!-- DIRECT CHAT -->
             <div class="card direct-chat direct-chat-primary">
                 <div class="card-header">
                     <h3 class="card-title">Direct Chat</h3>
@@ -52,78 +46,54 @@
                         </button>
                     </div>
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body">
-                    <!-- Conversations are loaded here -->
                     <div class="direct-chat-messages">
-                        <!-- Message. Default to the left -->
                         <div class="direct-chat-msg">
                             <div class="direct-chat-infos clearfix">
                                 <span class="direct-chat-name float-left">Alexander Pierce</span>
                                 <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
                             </div>
-                            <!-- /.direct-chat-infos -->
                             <img class="direct-chat-img" src="{{ asset('dist/img/user1-128x128.jpg') }}" alt="message user image">
-                            <!-- /.direct-chat-img -->
                             <div class="direct-chat-text">
                                 Is this template really for free? That's unbelievable!
                             </div>
-                            <!-- /.direct-chat-text -->
                         </div>
-                        <!-- /.direct-chat-msg -->
 
-                        <!-- Message to the right -->
                         <div class="direct-chat-msg right">
                             <div class="direct-chat-infos clearfix">
                                 <span class="direct-chat-name float-right">Sarah Bullock</span>
                                 <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
                             </div>
-                            <!-- /.direct-chat-infos -->
                             <img class="direct-chat-img" src="{{ asset('dist/img/user3-128x128.jpg') }}" alt="message user image">
-                            <!-- /.direct-chat-img -->
                             <div class="direct-chat-text">
                                 You better believe it!
                             </div>
-                            <!-- /.direct-chat-text -->
                         </div>
-                        <!-- /.direct-chat-msg -->
 
-                        <!-- Message. Default to the left -->
                         <div class="direct-chat-msg">
                             <div class="direct-chat-infos clearfix">
                                 <span class="direct-chat-name float-left">Alexander Pierce</span>
                                 <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
                             </div>
-                            <!-- /.direct-chat-infos -->
                             <img class="direct-chat-img" src="{{ asset('dist/img/user1-128x128.jpg') }}" alt="message user image">
-                            <!-- /.direct-chat-img -->
                             <div class="direct-chat-text">
                                 Working with AdminLTE on a great new app! Wanna join?
                             </div>
-                            <!-- /.direct-chat-text -->
                         </div>
-                        <!-- /.direct-chat-msg -->
 
-                        <!-- Message to the right -->
                         <div class="direct-chat-msg right">
                             <div class="direct-chat-infos clearfix">
                                 <span class="direct-chat-name float-right">Sarah Bullock</span>
                                 <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
                             </div>
-                            <!-- /.direct-chat-infos -->
                             <img class="direct-chat-img" src="{{ asset('dist/img/user3-128x128.jpg') }}" alt="message user image">
-                            <!-- /.direct-chat-img -->
                             <div class="direct-chat-text">
                                 I would love to.
                             </div>
-                            <!-- /.direct-chat-text -->
                         </div>
-                        <!-- /.direct-chat-msg -->
 
                     </div>
-                    <!--/.direct-chat-messages-->
 
-                    <!-- Contacts are loaded here -->
                     <div class="direct-chat-contacts">
                         <ul class="contacts-list">
                             <li>
@@ -138,10 +108,8 @@
                                         <span class="contacts-list-msg">How have you been? I
                                             was...</span>
                                     </div>
-                                    <!-- /.contacts-list-info -->
                                 </a>
                             </li>
-                            <!-- End Contact Item -->
                             <li>
                                 <a href="#">
                                     <img class="contacts-list-img" src="{{ asset('dist/img/user7-128x128.jpg') }}" alt="User Avatar">
@@ -153,10 +121,8 @@
                                         </span>
                                         <span class="contacts-list-msg">I will be waiting for...</span>
                                     </div>
-                                    <!-- /.contacts-list-info -->
                                 </a>
                             </li>
-                            <!-- End Contact Item -->
                             <li>
                                 <a href="#">
                                     <img class="contacts-list-img" src="{{ asset('dist/img/user3-128x128.jpg') }}" alt="User Avatar">
@@ -168,10 +134,8 @@
                                         </span>
                                         <span class="contacts-list-msg">I'll call you back at...</span>
                                     </div>
-                                    <!-- /.contacts-list-info -->
                                 </a>
                             </li>
-                            <!-- End Contact Item -->
                             <li>
                                 <a href="#">
                                     <img class="contacts-list-img" src="{{ asset('dist/img/user5-128x128.jpg') }}" alt="User Avatar">
@@ -183,10 +147,8 @@
                                         </span>
                                         <span class="contacts-list-msg">Where is your new...</span>
                                     </div>
-                                    <!-- /.contacts-list-info -->
                                 </a>
                             </li>
-                            <!-- End Contact Item -->
                             <li>
                                 <a href="#">
                                     <img class="contacts-list-img" src="{{ asset('dist/img/user6-128x128.jpg') }}" alt="User Avatar">
@@ -198,10 +160,8 @@
                                         </span>
                                         <span class="contacts-list-msg">Can I take a look at...</span>
                                     </div>
-                                    <!-- /.contacts-list-info -->
                                 </a>
                             </li>
-                            <!-- End Contact Item -->
                             <li>
                                 <a href="#">
                                     <img class="contacts-list-img" src="{{ asset('dist/img/user8-128x128.jpg') }}" alt="User Avatar">
@@ -213,16 +173,11 @@
                                         </span>
                                         <span class="contacts-list-msg">Never mind I found...</span>
                                     </div>
-                                    <!-- /.contacts-list-info -->
                                 </a>
                             </li>
-                            <!-- End Contact Item -->
                         </ul>
-                        <!-- /.contacts-list -->
                     </div>
-                    <!-- /.direct-chat-pane -->
                 </div>
-                <!-- /.card-body -->
                 <div class="card-footer">
                     <form action="#" method="post">
                         <div class="input-group">
@@ -233,23 +188,17 @@
                         </div>
                     </form>
                 </div>
-                <!-- /.card-footer-->
             </div>
-            <!--/.direct-chat -->
 
         </section>
-        <!-- /.Left col -->
-        <!-- right col (We are only adding the ID to make the widgets sortable)-->
         <section class="col-lg-5 connectedSortable">
 
-            <!-- Map card -->
             <div class="card bg-gradient-primary">
                 <div class="card-header border-0">
                     <h3 class="card-title">
                         <i class="fas fa-map-marker-alt mr-1"></i>
                         Visitors
                     </h3>
-                    <!-- card tools -->
                     <div class="card-tools">
                         <button type="button" class="btn btn-primary btn-sm daterange" title="Date range">
                             <i class="far fa-calendar-alt"></i>
@@ -258,36 +207,28 @@
                             <i class="fas fa-minus"></i>
                         </button>
                     </div>
-                    <!-- /.card-tools -->
                 </div>
                 <div class="card-body">
                     <div id="world-map" style="height: 250px; width: 100%;"></div>
                 </div>
-                <!-- /.card-body-->
                 <div class="card-footer bg-transparent">
                     <div class="row">
                         <div class="col-4 text-center">
                             <div id="sparkline-1"></div>
                             <div class="text-white">Visitors</div>
                         </div>
-                        <!-- ./col -->
                         <div class="col-4 text-center">
                             <div id="sparkline-2"></div>
                             <div class="text-white">Online</div>
                         </div>
-                        <!-- ./col -->
                         <div class="col-4 text-center">
                             <div id="sparkline-3"></div>
                             <div class="text-white">Sales</div>
                         </div>
-                        <!-- ./col -->
                     </div>
-                    <!-- /.row -->
                 </div>
             </div>
-            <!-- /.card -->
 
-            <!-- solid sales graph -->
             <div class="card bg-gradient-info">
                 <div class="card-header border-0">
                     <h3 class="card-title">
@@ -307,7 +248,6 @@
                 <div class="card-body">
                     <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                 </div>
-                <!-- /.card-body -->
                 <div class="card-footer bg-transparent">
                     <div class="row">
                         <div class="col-4 text-center">
@@ -315,27 +255,19 @@
 
                             <div class="text-white">Mail-Orders</div>
                         </div>
-                        <!-- ./col -->
                         <div class="col-4 text-center">
                             <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
 
                             <div class="text-white">Online</div>
                         </div>
-                        <!-- ./col -->
                         <div class="col-4 text-center">
                             <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
 
                             <div class="text-white">In-Store</div>
                         </div>
-                        <!-- ./col -->
                     </div>
-                    <!-- /.row -->
                 </div>
-                <!-- /.card-footer -->
             </div>
-            <!-- /.card -->
 
         </section>
-        <!-- right col -->
-    </div>
-    <!-- /.row (main row) -->
+    </div> -->
