@@ -24,8 +24,6 @@
     @Include('layouts.links.admin.head')
     @Include('layouts.links.admin.tutorial.sweet_alert.sweetalert')
     @Include('layouts.links.admin.tutorial.sweet_alert.head')
-    <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote-lite.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote.min.css') }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
@@ -268,21 +266,21 @@
         
          <!-- JCrop -->
          <script type="module">
-        import Cropper from 'cropperjs';
-        const image = document.getElementById('image');
-        const cropper = new Cropper(image, {
-            onChange: updatePreview,
-            onSelect: updatePreview,
-            onRelease: resetCoords,
-            aspectRatio: 16 / 9,
+            import Cropper from 'cropperjs';
+            const image = document.getElementById('image');
+            const cropper = new Cropper(image, {
+                onChange: updatePreview,
+                onSelect: updatePreview,
+                onRelease: resetCoords,
+                aspectRatio: 16 / 9,
 
-            crop(event) {},
-            function() {
-                jCropAPI = this
-                jCropAPI.removeAttr('style');
-            }
-        });
-    </script>
+                crop(event) {},
+                function() {
+                    jCropAPI = this
+                    jCropAPI.removeAttr('style');
+                }
+            });
+        </script>
         <!-- JQUery draggable -->
         <script>
             $('#imagelist li img').click(function(e) {
@@ -291,51 +289,87 @@
                  var image =  $('.editimage img').attr('src', imagepath);
                 $('.editimage img').load(document.URL + '.editimage img');
                 var img_id = $('#img_id').val(_this.find('.upload_img_id').val());
-                // var db_description = _this.find('.upload_description').val();
-
-                // var description = $("#description").val(db_description); //CKeditor
-                // CKEDITOR.replace(description);
-
-                // var description = $('#description').val(_this.find('.upload_description').val());
+                $('#description').val(_this.find('.upload_description').val());
+                var description = $('#description').val();
+                CKEDITOR.replace(description);
+                CKEDITOR.instances.description.setData('<p>' +description+ '</p>');
+                
                 $('#image_id').val(_this.find('.upload_img_id').val());
                 $('#image_lat').val(_this.find('.upload_img_lat').val());
                 $('#image_lang').val(_this.find('.upload_img_lang').val());
                 $('#image_width').val(_this.find('.upload_img_width').val());
                 $('#image_height').val(_this.find('.upload_img_height').val());
 
-                console.log(_this.find('.upload_img_id').val());
-                console.log(_this.find('.upload_img_lat').val());
-                console.log(_this.find('.upload_img_lang').val());
-                console.log(_this.find('.upload_img_width').val());
-                console.log(_this.find('.upload_img_height').val());
-                var $image = $(".editimage img"),
-                    $dataX = $(".upload_img_lat"),
-                    $dataY = $(".upload_img_lang"),
-                    $dataHeight = $(".upload_img_height"),
-                    $dataWidth = $(".upload_img_width");
-                    $image.cropper({
-                              aspectRatio: 16 / 9,
-                              data: {
-                                x: _this.find('.upload_img_lat').val(),
-                                y: _this.find('.upload_img_lang').val(),
-                                width: _this.find('.upload_img_width').val(),
-                                height: _this.find('.upload_img_height').val()
-                            },
-                            done: function(data) {
-                                $dataX.val(Math.round(data.x));
-                                $dataY.val(Math.round(data.y));
-                                $dataHeight.val(Math.round(data.height));
-                                $dataWidth.val(Math.round(data.width));
-                            },
-                              function() {
-                                        jCropAPI = this
-                              }
-                    });
-                console.log(img_id);
+                // console.log(_this.find('.upload_img_id').val());
+                // console.log(_this.find('.upload_img_lat').val());
+                // console.log(_this.find('.upload_img_lang').val());
+                // console.log(_this.find('.upload_img_width').val());
+                // console.log(_this.find('.upload_img_height').val());
+                
+                var id = _this.find('.upload_img_id').val();
+                var x = _this.find('.upload_img_lat').val();
+                var y = _this.find('.upload_img_lang').val();
+                var w = _this.find('.upload_img_width').val();
+                var h = _this.find('.upload_img_height').val();
+
+                // console.log('x = ' + x +'y = ' + y)
+
+                //    var $image = $("#edit_img img"),
+                //         $dataX = x,
+                //         $dataY = y,
+                //         $dataHeight = h,
+                //         $dataWidth = w;
+                // console.log($image);
+
+                // $('#edit_img img').cropper("setData", { 
+                //     x: x,
+                //     y: y,
+                //     width: w,
+                //     height: h
+                // });
+                //  import Cropper from 'cropperjs';
+                // new Cropper(image, {
+                //               aspectRatio: 16 / 9,
+                //               data: {
+                //                     x: x,
+                //                     y: y,
+                //                     width: w,
+                //                     height: h
+                //                 },
+                //               crop(data) {
+                //                  done: function(data) {
+                //                     x.val(Math.round(data.x));
+                //                     y.val(Math.round(data.y));
+                //                     h.val(Math.round(data.height));
+                //                     w.val(Math.round(data.width));
+                //                 },
+                //               },
+                //               function() {
+                //                         jCropAPI = this
+                //               }
+                //     });
+                    
+                // $image.cropper({
+                //         data: {
+                //         x: x,
+                //         y: y,
+                //         width: w,
+                //         height: h
+                //     },
+                //     // preview: ".img-preview",
+                //     done: function(data) {
+                //         x.val(Math.round(data.x));
+                //         y.val(Math.round(data.y));
+                //         h.val(Math.round(data.height));
+                //         w.val(Math.round(data.width));
+                //     },
+                //     function() {
+                //             jCropAPI = this
+                //     }
+                // });
+
+                // console.log(img_id);
                 // console.log(description);
-            $('.uppy-c-btn-primary').click(function() {
-                alerrt('jasdgf');
-            });
             $(function() {
                 $("#draggable").draggable();
             });
@@ -397,15 +431,13 @@
     <script src="{{ asset('dist/js/imageupload/jquery.fileupload.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.fancy-fileupload.js') }}"></script>
-    <script src="{{ asset('dist/js/pages/tutorial/summernote-lite.min.js') }}"></script>
-    <script src="{{ asset('dist/js/pages/tutorial/summer-note.js') }}"></script>
     <script src="/dist/js/tutorial/jcrop.js"></script>
-    // <!-- Uppy CDN -->
+    <!-- Uppy CDN -->
     <script src="https://releases.transloadit.com/uppy/v3.1.1/uppy.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"
         integrity="sha512-ooSWpxJsiXe6t4+PPjCgYmVfr1NS5QXJACcR/FPpsdm6kqG1FmQ2SVyg2RXeVuCRBLr0lWHnWJP6Zs1Efvxzww=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    // <!-- JQUERY Draggable -->
+    <!-- JQUERY Draggable -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     @Include('layouts.links.admin.foot')
