@@ -47,6 +47,8 @@
                                     icon: 'success',
                                     title: 'Updated Successfully'
                                 })
+                                cropper.destroy();
+                                // cropper = new Cropper(image, options);
                             },
                             error: (error) => {
                                 console.log(JSON.stringify(error));

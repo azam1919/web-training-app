@@ -24,8 +24,6 @@
     @Include('layouts.links.admin.head')
     @Include('layouts.links.admin.tutorial.sweet_alert.sweetalert')
     @Include('layouts.links.admin.tutorial.sweet_alert.head')
-    <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote-lite.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote.min.css') }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
@@ -80,6 +78,8 @@
         }, 10000);
     </script>
     <script src="/dist/js/tutorial/heading.js"></script>
+    <!-- JQUery draggable -->
+
 
 
 </head>
@@ -270,7 +270,6 @@
         <script>
             CKEDITOR.replace('description');
         </script>
-        <!-- JQUery draggable -->
         <script>
             $('#imagelist li img').click(function(e) {
                 var imagepath = $(this).attr('src');
@@ -287,6 +286,13 @@
                 // var description = $('#description').val(_this.find('.upload_description').val());
                 $('#image_id').val($('#img_id').val());
                 console.log(img_id);
+                cropper.destroy();
+                cropper.clear();
+                cropped = cropper.cropped;
+
+                if (cropped && options.viewMode > 0) {
+                    cropper.clear();
+                }
                 // console.log(description);
             });
             $('.uppy-c-btn-primary').click(function() {
@@ -341,13 +347,17 @@
             onSelect: updatePreview,
             onRelease: resetCoords,
             aspectRatio: 16 / 9,
-
-            crop(event) {},
+            crop(event) {
+            },
             function() {
                 jCropAPI = this
                 jCropAPI.removeAttr('style');
-            }
+            },
+            scope.$on('$destroy', function () {
+                $image.cropper('destroy');
+            });
         });
+        
     </script>
     @endsection
     <script src="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js"></script>
@@ -356,8 +366,6 @@
     <script src="{{ asset('dist/js/imageupload/jquery.fileupload.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.fancy-fileupload.js') }}"></script>
-    <script src="{{ asset('dist/js/pages/tutorial/summernote-lite.min.js') }}"></script>
-    <script src="{{ asset('dist/js/pages/tutorial/summer-note.js') }}"></script>
     <script src="/dist/js/tutorial/jcrop.js"></script>
     <!-- Uppy CDN -->
     <script src="https://releases.transloadit.com/uppy/v3.1.1/uppy.min.js"></script>
