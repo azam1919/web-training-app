@@ -202,6 +202,14 @@
                                                                         style="object-fit: contain;" class="rounded" />
                                                                     <input type="hidden" class="upload_img_id"
                                                                         value="{{ $get->id }}">
+                                                                        <input type="hidden" class="upload_img_lat"
+                                                                        value="{{ $get->latitude }}">
+                                                                        <input type="hidden" class="upload_img_lang"
+                                                                        value="{{ $get->longitude }}">
+                                                                        <input type="hidden" class="upload_img_width"
+                                                                        value="{{ $get->width }}">
+                                                                        <input type="hidden" class="upload_img_height"
+                                                                        value="{{ $get->height }}">
                                                                     <input type="hidden" class="upload_description"
                                                                         value="{{ $get->description }}">
                                                                     <span>{{ $get->image }} </span>
@@ -249,6 +257,11 @@
                                                             Description
                                                         </h3>
                                                         <input type="hidden" id="image_id">
+                                                        <input type="hidden" id="image_lat">
+                                                        <input type="hidden" id="image_lang">
+                                                        <input type="hidden" id="image_width">
+                                                        <input type="hidden" id="image_height">
+
                                                         <button class="btn btn-primary btn-sm ml-auto update_crop"
                                                             type="submit">Save</button>
                                                     </div>
@@ -274,17 +287,67 @@
             $('#imagelist li img').click(function(e) {
                 var imagepath = $(this).attr('src');
                 var _this = $(this).parents('li');
-                // alert(imagepath);    
-                $('.editimage img').attr('src', imagepath);
+                 var image =  $('.editimage img').attr('src', imagepath);
                 $('.editimage img').load(document.URL + '.editimage img');
                 var img_id = $('#img_id').val(_this.find('.upload_img_id').val());
                 // var db_description = _this.find('.upload_description').val();
 
                 // var description = $("#description").val(db_description); //CKeditor
                 // CKEDITOR.replace(description);
+                var description  =_this.find('.upload_description').val();
+                // CKEDITOR.replace( 'description' );
+                console.log(description);
 
-                // var description = $('#description').val(_this.find('.upload_description').val());
-                $('#image_id').val($('#img_id').val());
+                CKEDITOR.instances.description.setData( '<p>'+description+'</p>');
+                //  var data = CKEDITOR.instances.description.getData();
+
+                // $('#description').val(_this.find('.upload_description').val());
+                // alert(_this.find('.upload_description').val());
+                $('#image_id').val(_this.find('.upload_img_id').val());
+                $('#image_lat').val(_this.find('.upload_img_lat').val());
+                $('#image_lang').val(_this.find('.upload_img_lang').val());
+                $('#image_width').val(_this.find('.upload_img_width').val());
+                $('#image_height').val(_this.find('.upload_img_height').val());
+
+                console.log(_this.find('.upload_img_id').val());
+                console.log(_this.find('.upload_img_lat').val());
+                console.log(_this.find('.upload_img_lang').val());
+                console.log(_this.find('.upload_img_width').val());
+                console.log(_this.find('.upload_img_height').val());
+                var imageBox = $('.editimage img');
+
+                 var DefaultCropBoxOptionObj = {}; // declare early
+                var options = {
+                    aspectRatio: 1/2,
+                    built: function() {
+                        imageBox.cropper('setCropBoxData', DefaultCropBoxOptionObj);
+                    },
+                };
+                
+                 imageBox.cropper(options);
+                    // set params
+                    DefaultCropBoxOptionObj = {
+                       x : _this.find('.upload_img_lat').val(),
+                        y : _this.find('.upload_img_lang').val(),
+                        height: _this.find('.upload_img_height').val(),
+                        width: _this.find('.upload_img_width').val()
+                    };
+                    // replace seems a bit buggy, fire once on built event
+                    imageBox.one('built.cropper', function(){
+                        imageBox.cropper('replace', imageURL);
+                    });
+
+
+                
+                // x =_this.find('.upload_img_lat').val();
+                // y =_this.find('.upload_img_lang').val();
+                // width =_this.find('.upload_img_width').val();
+                // height =_this.find('.upload_img_height').val();
+                // $(".editimage img").onload = function() {
+                //     context.drawImage($(".editimage img"), x, y, width, height);
+                //     callback(canvas.toDataURL())
+                // };
+
                 console.log(img_id);
                 cropper.destroy();
                 cropper.clear();
@@ -294,12 +357,12 @@
                     cropper.clear();
                 }
                 // console.log(description);
-            });
             $('.uppy-c-btn-primary').click(function() {
                 alerrt('jasdgf');
             });
             $(function() {
                 $("#draggable").draggable();
+            });
             });
         </script>
 
@@ -327,10 +390,6 @@
                 fieldName: 'fancy_upload[]',
 
             })
-        .use(Tus, {
-                endpoint: 'https://tusd.tusdemo.net/files/', // use your tus endpoint here
-                retryDelays: [0, 1000, 3000, 5000],
-            })
             .use(GoldenRetriever)
         uppy.on('complete', (result) => {
             console.log('Upload complete! We’ve uploaded these files:', result.successful);
@@ -347,17 +406,13 @@
             onSelect: updatePreview,
             onRelease: resetCoords,
             aspectRatio: 16 / 9,
-            crop(event) {
-            },
+
+            crop(event) {},
             function() {
                 jCropAPI = this
                 jCropAPI.removeAttr('style');
-            },
-            scope.$on('$destroy', function () {
-                $image.cropper('destroy');
-            });
+            }
         });
-        
     </script>
     @endsection
     <script src="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js"></script>
@@ -367,14 +422,15 @@
     <script src="{{ asset('dist/js/imageupload/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.fancy-fileupload.js') }}"></script>
     <script src="/dist/js/tutorial/jcrop.js"></script>
-    <!-- Uppy CDN -->
-    <script src="https://releases.transloadit.com/uppy/v3.1.1/uppy.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"
+     <!-- JQUery draggable -->
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"
         integrity="sha512-ooSWpxJsiXe6t4+PPjCgYmVfr1NS5QXJACcR/FPpsdm6kqG1FmQ2SVyg2RXeVuCRBLr0lWHnWJP6Zs1Efvxzww=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- JQUERY Draggable -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+        <!-- JQUERY Draggable -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <!-- Uppy CDN -->
+    <script src="https://releases.transloadit.com/uppy/v3.1.1/uppy.min.js"></script>
     @Include('layouts.links.admin.foot')
     @Include('layouts.links.admin.tutorial.sweet_alert.foot')
 
