@@ -17,13 +17,15 @@
     <!-- Jquery Draggable Css -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <!-- Jquery Draggable Css end  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css"
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css"
         integrity="sha512-+VDbDxc9zesADd49pfvz7CgsOl2xREI/7gnzcdyA9XjuTxLXrdpuz21VVIqc5HPfZji2CypSbxx1lgD7BgBK5g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.0/cropper.min.css" rel="stylesheet" />
     @Include('layouts.links.admin.head')
     @Include('layouts.links.admin.tutorial.sweet_alert.sweetalert')
     @Include('layouts.links.admin.tutorial.sweet_alert.head')
+    <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote-lite.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/tutorial/summernote.min.css') }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
@@ -87,146 +89,128 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     @extends('layouts.admin.master')
     @section('content')
-        <div class="wrapper">
-            <section>
-                @foreach ($web_trainings as $web_training)
-                    <!-- Content Wrapper. Contains page content -->
-                    <div class="content-wrapper">
-                        <!-- Content Header (Page header) -->
-                        <div class="content-header">
-                            <div class="container-fluid">
-                                @if (session('success'))
-                                    <div id="success" class="alert alert-default-success alert-dismissible fade show"
-                                        role="alert">
-                                        <strong>{{ session('success') }}</strong>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                @endif
-                                <div class="row mb-2">
-                                    <div class="col-sm-6">
-                                        <h1 class="m-0">Create {{ $heading['0']->heading ?? ' ' }} Tutorials</h1>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <ol class="breadcrumb float-sm-right">
-                                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                            <li class="breadcrumb-item active">Create Tutorials</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <form action="{{ route('heading.edit.update') }}" class="input-group" method="post"
-                                            id="actionUrl">
-                                            @csrf
-                                            <input type="hidden" name="id" id="id"
-                                                value="{{ $web_training->id }}">
-                                            <div class="input-group-append">
-                                                <select name="status" id="status" class="form-control">
-                                                    <option value="@if ($web_training->status == 0) 0 @else 1 @endif"
-                                                        hidden selected>
-                                                        @if ($web_training->status == 0)
-                                                            Draft
-                                                        @else
-                                                            Publish
-                                                        @endif
-                                                    </option>
-                                                    <option value="0">Draft</option>
-                                                    <option value="1">Publish</option>
-                                                </select>
-                                            </div>
-                                            <input type="text" class="form-control" id="heading"
-                                                value="{{ $web_training->heading }}" placeholder="..."
-                                                aria-label="Recipient's username" aria-describedby="basic-addon2">
-
-                                            <div class="input-group-append ml-3">
-                                                <button type="submit" class="btn btn-secondary update_heading"
-                                                    style="background-color: #091e3e">Update</button>
-                                            </div>
-                                            <span id="heading_error" class="invalid-feedback"></span>
-                                        </form>
-                                    </div>
-                                </div>
+    <div class="wrapper">
+        <section>
+            @foreach ($web_trainings as $web_training)
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        @if (session('success'))
+                        <div id="success" class="alert alert-default-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session('success') }}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 class="m-0">Create {{ $heading['0']->heading ?? ' ' }} Tutorials</h1>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active">Create Tutorials</li>
+                                </ol>
                             </div>
                         </div>
-                        <!-- /.content-header -->
-                        <!-- Main content -->
-                        <link rel="stylesheet" href="{{ asset('dist/css/imageupload/fancy_fileupload.css') }}">
-                        <section class="content">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <section class="col-lg-5 connectedSortable">
-                                        <!-- Custom tabs with image drag and drop -->
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h3 class="card-title">
-                                                    <i class="fas fa-image mr-1"></i>
-                                                    Images
-                                                </h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="p-0">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-lg-12"
-                                                                style="height: 350px; overflow: hidden; ">
-                                                                <form method="post"
-                                                                    action="{{ url('tutorial/create/store') }}">
-                                                                    <div id="drag-drop-area" name="fancy_upload[]"></div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form action="{{ route('heading.edit.update') }}" class="input-group" method="post" id="actionUrl">
+                                    @csrf
+                                    <input type="hidden" name="id" id="id" value="{{ $web_training->id }}">
+                                    <div class="input-group-append">
+                                        <select name="status" id="status" class="form-control">
+                                            <option value="@if ($web_training->status == 0) 0 @else 1 @endif" hidden selected>
+                                                @if ($web_training->status == 0)
+                                                Draft
+                                                @else
+                                                Publish
+                                                @endif
+                                            </option>
+                                            <option value="0">Draft</option>
+                                            <option value="1">Publish</option>
+                                        </select>
+                                    </div>
+                                    <input type="text" class="form-control" id="heading" value="{{ $web_training->heading }}" placeholder="..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+                                    <div class="input-group-append ml-3">
+                                        <button type="submit" class="btn btn-secondary update_heading" style="background-color: #091e3e">Update</button>
+                                    </div>
+                                    <span id="heading_error" class="invalid-feedback"></span>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.content-header -->
+                <!-- Main content -->
+                <link rel="stylesheet" href="{{ asset('dist/css/imageupload/fancy_fileupload.css') }}">
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <section class="col-lg-5 connectedSortable">
+                                <!-- Custom tabs with image drag and drop -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            <i class="fas fa-image mr-1"></i>
+                                            Images
+                                        </h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="p-0">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-lg-12" style="height: 350px; overflow: hidden; ">
+                                                        <form method="post" action="{{ url('tutorial/create/store') }}">
+                                                            <div id="drag-drop-area" name="fancy_upload[]"></div>
+                                                        </form>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card -->
+                                <!-- Uploaded images -->
+                                <div class="card" id="upload_images">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            <i class="fas fa-image mr-1"></i>
+                                            Uploaded Images
+                                        </h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="tab-content p-0">
+                                            <div class="chart " id="revenue-chart" style="position: relative; height: 315px; overflow-y: scroll;">
+                                                <ul style="list-style: none;" id="imagelist">
+                                                    @foreach ($images as $get)
+                                                    <li class="my-3 row w-auto">
+                                                        <img src="{{ URL::to($get->image) }}" alt="image" width="50px" height="50px" style="object-fit: contain;" class="rounded" />
+                                                        <input type="hidden" class="upload_img_id" value="{{ $get->id }}">
+                                                        <input type="hidden" class="upload_img_lat" value="{{ $get->latitude }}">
+                                                        <input type="hidden" class="upload_img_lang" value="{{ $get->longitude }}">
+                                                        <input type="hidden" class="upload_img_width" value="{{ $get->width }}">
+                                                        <input type="hidden" class="upload_img_height" value="{{ $get->height }}">
+                                                        <input type="hidden" class="upload_description" value="{{ $get->description }}">
+                                                        <span>{{ $get->image }} </span>
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
                                             </div>
                                         </div>
                                         <!-- /.card -->
-                                        <!-- Uploaded images -->
-                                        <div class="card" id="upload_images">
-                                            <div class="card-header">
-                                                <h3 class="card-title">
-                                                    <i class="fas fa-image mr-1"></i>
-                                                    Uploaded Images
-                                                </h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="tab-content p-0">
-                                                    <div class="chart " id="revenue-chart"
-                                                        style="position: relative; height: 315px; overflow-y: scroll;">
-                                                        <ul style="list-style: none;" id="imagelist">
-                                                            @foreach ($images as $get)
-                                                                <li class="my-3 row w-auto">
-                                                                    <img src="{{ URL::to($get->image) }}" alt="image"
-                                                                        width="50px" height="50px"
-                                                                        style="object-fit: contain;" class="rounded" />
-                                                                    <input type="hidden" class="upload_img_id"
-                                                                        value="{{ $get->id }}">
-                                                                        <input type="hidden" class="upload_img_lat"
-                                                                        value="{{ $get->latitude }}">
-                                                                        <input type="hidden" class="upload_img_lang"
-                                                                        value="{{ $get->longitude }}">
-                                                                        <input type="hidden" class="upload_img_width"
-                                                                        value="{{ $get->width }}">
-                                                                        <input type="hidden" class="upload_img_height"
-                                                                        value="{{ $get->height }}">
-                                                                    <input type="hidden" class="upload_description"
-                                                                        value="{{ $get->description }}">
-                                                                    <span>{{ $get->image }} </span>
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <!-- /.card -->
-                                                <!-- right col -->
-                                            </div>
-                                        </div>
-                                    </section>
-                                    <!-- /.Left col -->
-                                    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                                        <!-- right col -->
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- /.Left col -->
+                            <!-- right col (We are only adding the ID to make the widgets sortable)-->
 
-                                    <section class="col-lg-7 connectedSortable" id="draggable">
+                            <section class="col-lg-7 connectedSortable" id="draggable">
 
                                         <!-- Edit Image Section -->
                                         <div class="card">
@@ -257,32 +241,49 @@
                                                             Description
                                                         </h3>
                                                         <input type="hidden" id="image_id">
-                                                        <input type="hidden" id="image_lat">
-                                                        <input type="hidden" id="image_lang">
-                                                        <input type="hidden" id="image_width">
-                                                        <input type="hidden" id="image_height">
+                                                        <input type="hidden" id="image_id">
+                                                        <input type="hidden" id="image_id">
+                                                        <input type="hidden" id="image_id">
+                                                        <input type="hidden" id="image_id">
 
-                                                        <button class="btn btn-primary btn-sm ml-auto update_crop"
-                                                            type="submit">Save</button>
-                                                    </div>
-                                                </div>
-                                                <input type="text" name="description" id="description"
-                                                    value="" />
-                                            </form>
+                                                <button class="btn btn-primary btn-sm ml-auto update_crop" type="submit">Save</button>
+                                            </div>
                                         </div>
-                                    </section>
+                                        <input type="text" name="description" id="description" value="" />
+                                    </form>
                                 </div>
-                                <!-- /.card -->
-                                <!-- right col -->
-                            </div>
+                            </section>
+                        </div>
+                        <!-- /.card -->
+                        <!-- right col -->
                     </div>
-                @endforeach
-            </section>
-        </div>
+            </div>
+            @endforeach
+        </section>
+    </div>
 
         <script>
             CKEDITOR.replace('description');
         </script>
+        
+         <!-- JCrop -->
+         <script type="module">
+        import Cropper from 'cropperjs';
+        const image = document.getElementById('image');
+        const cropper = new Cropper(image, {
+            onChange: updatePreview,
+            onSelect: updatePreview,
+            onRelease: resetCoords,
+            aspectRatio: 16 / 9,
+
+            crop(event) {},
+            function() {
+                jCropAPI = this
+                jCropAPI.removeAttr('style');
+            }
+        });
+    </script>
+        <!-- JQUery draggable -->
         <script>
             $('#imagelist li img').click(function(e) {
                 var imagepath = $(this).attr('src');
@@ -294,15 +295,8 @@
 
                 // var description = $("#description").val(db_description); //CKeditor
                 // CKEDITOR.replace(description);
-                var description  =_this.find('.upload_description').val();
-                // CKEDITOR.replace( 'description' );
-                console.log(description);
 
-                CKEDITOR.instances.description.setData( '<p>'+description+'</p>');
-                //  var data = CKEDITOR.instances.description.getData();
-
-                // $('#description').val(_this.find('.upload_description').val());
-                // alert(_this.find('.upload_description').val());
+                // var description = $('#description').val(_this.find('.upload_description').val());
                 $('#image_id').val(_this.find('.upload_img_id').val());
                 $('#image_lat').val(_this.find('.upload_img_lat').val());
                 $('#image_lang').val(_this.find('.upload_img_lang').val());
@@ -314,48 +308,30 @@
                 console.log(_this.find('.upload_img_lang').val());
                 console.log(_this.find('.upload_img_width').val());
                 console.log(_this.find('.upload_img_height').val());
-                var imageBox = $('.editimage img');
-
-                 var DefaultCropBoxOptionObj = {}; // declare early
-                var options = {
-                    aspectRatio: 1/2,
-                    built: function() {
-                        imageBox.cropper('setCropBoxData', DefaultCropBoxOptionObj);
-                    },
-                };
-                
-                 imageBox.cropper(options);
-                    // set params
-                    DefaultCropBoxOptionObj = {
-                       x : _this.find('.upload_img_lat').val(),
-                        y : _this.find('.upload_img_lang').val(),
-                        height: _this.find('.upload_img_height').val(),
-                        width: _this.find('.upload_img_width').val()
-                    };
-                    // replace seems a bit buggy, fire once on built event
-                    imageBox.one('built.cropper', function(){
-                        imageBox.cropper('replace', imageURL);
+                var $image = $(".editimage img"),
+                    $dataX = $(".upload_img_lat"),
+                    $dataY = $(".upload_img_lang"),
+                    $dataHeight = $(".upload_img_height"),
+                    $dataWidth = $(".upload_img_width");
+                    $image.cropper({
+                              aspectRatio: 16 / 9,
+                              data: {
+                                x: _this.find('.upload_img_lat').val(),
+                                y: _this.find('.upload_img_lang').val(),
+                                width: _this.find('.upload_img_width').val(),
+                                height: _this.find('.upload_img_height').val()
+                            },
+                            done: function(data) {
+                                $dataX.val(Math.round(data.x));
+                                $dataY.val(Math.round(data.y));
+                                $dataHeight.val(Math.round(data.height));
+                                $dataWidth.val(Math.round(data.width));
+                            },
+                              function() {
+                                        jCropAPI = this
+                              }
                     });
-
-
-                
-                // x =_this.find('.upload_img_lat').val();
-                // y =_this.find('.upload_img_lang').val();
-                // width =_this.find('.upload_img_width').val();
-                // height =_this.find('.upload_img_height').val();
-                // $(".editimage img").onload = function() {
-                //     context.drawImage($(".editimage img"), x, y, width, height);
-                //     callback(canvas.toDataURL())
-                // };
-
                 console.log(img_id);
-                cropper.destroy();
-                cropper.clear();
-                cropped = cropper.cropped;
-
-                if (cropped && options.viewMode > 0) {
-                    cropper.clear();
-                }
                 // console.log(description);
             $('.uppy-c-btn-primary').click(function() {
                 alerrt('jasdgf');
@@ -363,10 +339,10 @@
             $(function() {
                 $("#draggable").draggable();
             });
-            });
-        </script>
+        });
+    </script>
 
-        <script type="module">
+    <script type="module">
         import {
             Uppy,
             Dashboard,
@@ -393,7 +369,7 @@
             .use(GoldenRetriever)
         uppy.on('complete', (result) => {
             console.log('Upload complete! We’ve uploaded these files:', result.successful);
-            $('#upload_images #imagelist').empty().load(document.URL + '#upload_images #imagelist li');            
+            $('#upload_images #imagelist').empty().load(document.URL + '#upload_images #imagelist li');
         });
     </script>
 
@@ -421,16 +397,17 @@
     <script src="{{ asset('dist/js/imageupload/jquery.fileupload.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('dist/js/imageupload/jquery.fancy-fileupload.js') }}"></script>
+    <script src="{{ asset('dist/js/pages/tutorial/summernote-lite.min.js') }}"></script>
+    <script src="{{ asset('dist/js/pages/tutorial/summer-note.js') }}"></script>
     <script src="/dist/js/tutorial/jcrop.js"></script>
-     <!-- JQUery draggable -->
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"
+    // <!-- Uppy CDN -->
+    <script src="https://releases.transloadit.com/uppy/v3.1.1/uppy.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"
         integrity="sha512-ooSWpxJsiXe6t4+PPjCgYmVfr1NS5QXJACcR/FPpsdm6kqG1FmQ2SVyg2RXeVuCRBLr0lWHnWJP6Zs1Efvxzww=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <!-- JQUERY Draggable -->
-        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <!-- Uppy CDN -->
-    <script src="https://releases.transloadit.com/uppy/v3.1.1/uppy.min.js"></script>
+    // <!-- JQUERY Draggable -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     @Include('layouts.links.admin.foot')
     @Include('layouts.links.admin.tutorial.sweet_alert.foot')
 
