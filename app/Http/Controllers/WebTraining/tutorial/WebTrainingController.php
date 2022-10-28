@@ -29,8 +29,16 @@ class WebTrainingController extends Controller
             // dd($web_trainings_asset);
             $web_trainings = WebTraining::where('id', $web_tr_id)->select('heading')->get();
             // dd($heading->toArray());
-            $images = WebTrainingAsset::where('web_tr_id', $web_tr_id)->get();
-            return view('admin.web-training.tutorial.create', ['web_trainings' => $web_trainings, 'images' => $images, 'web_trainings_asset' => json_decode($web_trainings_asset, true)]);
+            // $images = WebTrainingAsset::where('web_tr_id', $web_tr_id)->get();
+            // $images = WebTrainingAsset::where('edit_status' , 1)->orderB('position')->get();
+            $images = DB::table('web_trainings_assets')->where('edit_status', 0)->orderBy('position')->get();
+
+            // ->orderBy('created_at', 'desc')->get();
+            // Images getting through status
+            // $statusImages = WebTrainingAsset::where('edit_status',0)->orderBy('position')->get();
+            $statusImages = DB::table('web_trainings_assets')->where('edit_status', 1)->orderBy('position')->get();
+            // return $statusImages;
+            return view('admin.web-training.tutorial.create', ['web_trainings' => $web_trainings, 'statusImages' => $statusImages, 'images' => $images, 'web_trainings_asset' => json_decode($web_trainings_asset, true)]);
         } else {
             return back();
         }
@@ -64,7 +72,8 @@ class WebTrainingController extends Controller
                 'web_tr_id' => $web_tr_id,
                 'latitude' => null,
                 'longitude' => null,
-                'height' => null
+                'height' => null,
+                'edit_status' => 1
 
             ]);
             $web_tr_id = Session::get('web_tr_id');
@@ -86,6 +95,7 @@ class WebTrainingController extends Controller
                 'latitude' => $y,
                 'width' => $width,
                 'height' => $height,
+                'edit_status' => 1
             ]);
             $data = [
                 'id' => $id,
@@ -94,6 +104,7 @@ class WebTrainingController extends Controller
                 'y' => $y,
                 'width' => $width,
                 'height' => $height,
+                'edit_status' => 1
             ];
             return json_encode($data);
         } else {
@@ -134,10 +145,28 @@ class WebTrainingController extends Controller
         // Azam's code end
     }
 
+    public function updatePosition()
+    {
+        if (isset($_POST['update']) && isset($_POST['parentid'])) {
+            foreach ($_POST['positions'] as $position) {
+                $index = $position[0];
+                $newPosition = $position[1];
+                $update = DB::update("UPDATE web_trainings_assets SET position = '$newPosition' WHERE id='$index' AND web_tr_id = " . $_POST['parentid'] );
+                if($update){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+    }
+
+
     public function storing(Request $request)
     {
         if (FacadesRequest::isMethod('get')) {
-            return view('admin.web-training.test');
+            return view('admin.web-training.test1');
+            // return view('admin.web-training.test');
         } elseif (FacadesRequest::isMethod('post')) {
         } else {
         }

@@ -32,7 +32,7 @@ Route::post('/logout', [LogoutController::class, 'logout']);
 Route::prefix('admin')->group(function () {
     Route::match(['get', 'post'], '/', [LoginController::class, 'admin_login']);
 
-    // Route::middleware('AdminLogin')->group(function () {
+    
     //For Login
     Route::prefix('auth')->group(function () {
         Route::view('/forget', 'user.auth.forget');
@@ -57,14 +57,14 @@ Route::prefix('admin')->group(function () {
         Route::prefix('tutorial')->group(function () {
             Route::get('/create', [WebTrainingController::class, 'show'])->name('tutorial.create.show');
             Route::post('/create', [WebTrainingController::class, 'store'])->name('tutorial.create.store');
+
             Route::get('/edit/{id}', [WebTrainingController::class, 'edit'])->name('tutorial.edit.show');
             Route::post('/edit', [WebTrainingController::class, 'update'])->name('tutorial.edit.update');
         });
     });
     Route::match(['get', 'post'], '/test', [WebTrainingController::class, 'storing']);
 
-
-    // });
+    Route::post('/updatePosition', [WebTrainingController::class, 'updatePosition'])->name('updatePosition');
 });
 
 Route::resource('image', ImageController::class);
